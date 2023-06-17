@@ -30,7 +30,6 @@ const archEnemyDeck = [];
 
 
 document.querySelector('button').addEventListener('click', getFetch)
-document.querySelector('h3').addEventListener('click', getTest)
 
 function getFetch(){
  console.log('working')
@@ -91,7 +90,16 @@ function getFetch(){
             // Event listener logic
             //This brings out the the img src.
             console.log('Item clicked:', item);
+            archEnemyDeck.push(item)
+            console.log(archEnemyDeck)
             // Additional code to handle the click event that adds the cards to the deck
+
+            const potentialDeck = document.getElementById('potenitalDeck')
+
+    for(let i=0;i<=archEnemyDeck.length;i++){
+      
+    }
+
   });
   
 });
@@ -102,15 +110,11 @@ function getFetch(){
       });
 }
 
-
-
-function getTest(){
-  console.log(schemeDeck)
-}
-
+//
+//
+//
 //*randomize array right here
 document.getElementById("shuffle").addEventListener ('click', shuffleDeck)
-
 //!This function works shuffling the scheme deck array. This is the base. All i need to do now is to set up a playerDeck for the cards the user wants, and then put that array through this function.
 function shuffleDeck(){
 var randomizeArray=function(array){
@@ -130,15 +134,16 @@ var randomizeArray=function(array){
 
 randomizeArray(schemeDeck)
 console.log(schemeDeck)
-
 }
 
 
+
+//This will remove the card from your potential deck
 document.getElementById('undo').addEventListener('click', undo)
-
 function undo(){
-
-  archEnemyDeck.slice(0,-1)
-
+  archEnemyDeck.pop()
+  console.log(archEnemyDeck)
 }
+
+
 

@@ -45,6 +45,18 @@
   h1{
       color: rgb(255, 255, 255);
   }
-  img{
+  /* ol img{
       width: 50%;
+  } */
+
+  /*Need To change this for mobile screens mostly*/
+  ol{
+    display: inline-flex;
+    width: 50%;
+    overflow: auto;
+  }
+
+  li{
+    list-style-type: none;
+    padding: 15px;
   }

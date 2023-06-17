@@ -26,22 +26,27 @@
     <h1>Click here for a list of the sets</h1>
     <button input="click">Fetch the list of schemes</button>
     <button id="shuffle" input="click">Shuffle deck</button>
-    <h3>Check if array worked</h3>
+    <div>
+      <button id="undo">Undo</button>
+    </div>
+
+
 
     <div>
         <section>
             <h3>Here are your possible schemes!!</h3>
-            <ul id="listOfSchemes">
-            </ul>
+            <ol id="listOfSchemes">
+            </ol>
         </section>
-      </div>
+    </div>
+
       <div class="holder">
         <h3>Your deck will be built here!</h3>
-          <div id="deck"></div>
+          <div id="potentialDeck">
+          </div>
       </div>
-    <div>
-      <button id="undo">Undo</button>
-    </div>
+
+    
     
 </body>
 <script src ="main.js"> </script>
