@@ -23,12 +23,31 @@
 
 </head>
 <body>
-    <h1>Click here for a list of the sets</h1>
+  <nav>
+    <ul>
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a href="PlanesChase.html">PlanesChase</a>
+      </li>
+      <li>
+        <a href="Rules.html">Rules</a>
+      </li>
+    </ul>
+  </nav>
+
+    <h1>Archenemy Deck Builder</h1>
+    <span>A 4-Player Pod Alternative</span>
+
+    <div>
+      <h2>How to play and rules</h2>
+      <p>In Archenemy the game is played like a magic game, except with a twist. Typicall
+    </div>
+
     <button input="click">Fetch the list of schemes</button>
     <button id="shuffle" input="click">Shuffle deck</button>
-    <div>
-      <button id="undo">Undo</button>
-    </div>
+
 
 
 
@@ -40,9 +59,13 @@
         </section>
     </div>
 
+      <!--! This space will be my deck building area. The Undo Button will be able to cut the last card added to the deck -->
       <div class="holder">
         <h3>Your deck will be built here!</h3>
           <div id="potentialDeck">
+          </div>
+          <div>
+            <button id="undo">Undo</button>
           </div>
       </div>
 

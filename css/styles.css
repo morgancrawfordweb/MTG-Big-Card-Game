@@ -60,3 +60,22 @@
     list-style-type: none;
     padding: 15px;
   }
+  nav *{
+    display: inline;
+  }
+
+
+  .top2{
+    display: flex;
+    width: 100%;
+  }
+  .bottom2{
+    display: flex;
+  }
+  .currentPlane{
+    display: flex;
+    align-content: center;
+  }
+  #planeschaseExample *{
+    width: 75%
+  }
