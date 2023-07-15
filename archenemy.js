@@ -24,6 +24,9 @@ const schemeDeck = [];
 //*This is the deck that the player or "Archenemy" will use
 const archEnemyDeck = [];
 
+//*This sets the most of the same cards you can have in an array/
+const maxCardCount = 2
+
 
 document.getElementById('schemes').addEventListener('click', getSchemes)
 
@@ -36,6 +39,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
   }
   
   function renderSchemes(schemeDeck) {
+    console.log(schemeDeck)
     for (let i = 0; i < schemeDeck.length; i++) {
       const listOfSchemes = document.getElementById("listOfSchemes");
       const li = document.createElement('li');
@@ -50,31 +54,79 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
   }
   
 
-  //adds my event listeners to add or remove cards from the dom.
-  function attachClickListeners(schemeDeck, archEnemyDeck) {
+  function attachClickListeners() {
     const items = document.querySelectorAll('.cardImage');
     items.forEach(item => {
-      //adds the event listener to add the card to the deck.
       item.addEventListener('click', function() {
-        console.log('card added to arch enemy deck')
-        archEnemyDeck.push(item);
-        const archEnemyDraftPicks = document.getElementById("archEnemyDraftPicks");
-        const li = document.createElement('li');
-        const img = document.createElement('img');
-  
-        img.src = item.src;
-        img.className = 'cardImage';
-        li.appendChild(img);
-        archEnemyDraftPicks.appendChild(li);
+        const cardId = item.dataset.id;
+        const selectedCard = schemeDeck.find(card => card.id === cardId);
+        if (selectedCard) {
+          const pickedCount = countCardInDeck(selectedCard);
+          if (pickedCount < maxCardCount) {
+            addCardToDeck(selectedCard);
+          } else {
+            removeCardFromDeck(selectedCard);
+          }
+        }
       });
-
-      //adds the event listener so that a card may be removed from the dom if you dont like it. This is the basis for my 'undo' function
-      item.addEventListener('click',function(){
-        const removedCard = archEnemyDeck.pop();
-        
-      })
     });
   }
+
+  
+  //function checks to see if the card ID's are the same
+  function countCardInDeck(card) {
+    const count = archEnemyDeck.reduce((total, currentCard) => {
+      return currentCard.id === card.id ? total + 1 : total;
+    }, 0);
+    return count;
+  }
+  
+  function addCardToDeck(card) {
+    archEnemyDeck.push(card);
+    renderArchEnemyDeck();
+  }
+  
+  function removeCardFromDeck(card) {
+    const index = archEnemyDeck.findIndex(c => c.id === card.id);
+    if (index !== -1) {
+      archEnemyDeck.splice(index, 1);
+      console.log('worked')
+      renderArchEnemyDeck();
+    }
+  }
+  
+  function renderArchEnemyDeck() {
+    const parentElement = document.getElementById("archEnemyDraftPicks");
+    parentElement.innerHTML = '';
+    archEnemyDeck.forEach(card => {
+      const pickedCount = countCardInDeck(card);
+      if (pickedCount <= maxCardCount) {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        img.src = card.imageUrl;
+        img.className = 'cardImage';
+        img.dataset.id = card.id;
+        li.appendChild(img);
+        parentElement.appendChild(li);
+      }
+    });
+  }
+  
+  // Add Undo button only if a card was removed
+  if (removedCard) {
+    const undoButton = document.getElementById('undo');
+    undoButton.textContent = 'Undo';
+    undoButton.addEventListener('click', undoRemoveCard);
+  }
+
+function undoRemoveCard() {
+  if (removedCard) {
+    addCardToDeck(removedCard); // Add the removed card back to the deck
+  }
+}
+
+  // Call the attachClickListeners() function to attach event listeners to the cards
+  attachClickListeners();
   
   function getSchemes() {
     console.log('working');
@@ -86,6 +138,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
   
         renderSchemes(schemeDeck);
         attachClickListeners(schemeDeck, archEnemyDeck);
+        
       })
       .catch(err => {
         console.log(`error ${err}`);
@@ -121,7 +174,35 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
    }
    
    
-   
+//!
+//?Maybe I can check to see the card type after each button click. The loop will be continuously running Like an arrow button that shuffles through array. for(let i=0:i<=array.length;i++){show array[i] until i click the next arrow or back arrow.}
+//TODO Need a way to sort the schemes. Use this code:
+//!
+
+//TODO const filteredDeck = deck.filter((deck)=>{
+//TODO  const name = deck.name
+
+//TODO   const sortByPhenomenon = function(a,b){
+//TODO     if(a.type === 'Phenomenon' && b.type !=='Phenomenon'){
+//TODO       return -1
+//TODO     }else if(a.type !== 'Phenomenon' && b.type ==='Phenomenon'){
+//TODO       return 1
+//TODO     }else{
+//TODO       return a.name.localeCompare(b.name)
+//TODO     }
+//TODO   }
+//TODO   sortByPhenomenon(deck)
+  
+//TODO   if(!sortedDeck[name]){
+//TODO     sortedDeck[name] = true;
+//TODO     return true
+//TODO   }
+//TODO   return false;
+//TODO })
+
+
+
+
    //This will remove the card from your potential deck
   //  document.getElementById('undo').addEventListener('click', undo)
   //  function undo(){
