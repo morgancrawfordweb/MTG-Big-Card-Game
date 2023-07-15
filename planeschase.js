@@ -41,6 +41,7 @@ function getPlanes() {
             }
           });
         });
+        
         return planechaseDeck;
       });
   }
@@ -48,24 +49,22 @@ function getPlanes() {
   //button to fetch all of the cards and put them inside of my planeschase array
   fetchAllCards()
     .then(deck => {
-      // console.log(deck)
+      console.log(planechaseDeck)
       const sortedDeck = {}
       
       // This functions filters out the planar deck by only adding decks with a unique name. Functoin checks to see if the name already exists, if it does then it gets returned, otherwise it stays.
       const filteredDeck = deck.filter((deck)=>{
         const name = deck.name
-
-        const sortByPhenomenon = function(a,b){
-          if(a.type === 'Phenomenon' && b.type !=='Phenomenon'){
-            return -1
-          }else if(a.type !== 'Phenomenon' && b.type ==='Phenomenon'){
-            return 1
-          }else{
-            return a.name.localeCompare(b.name)
-          }
-        }
-        sortByPhenomenon(deck)
         
+        // const sortByPhenomenon = function(a,b){
+        //   if(a.type == 'Phenomenon' && b.type !='Phenomenon'){
+        //     return -1
+        //   }else if(a.type != 'Phenomenon' && b.type =='Phenomenon'){
+        //     return 1
+        //   }
+        // }
+        // sortByPhenomenon(deck)
+        // console.log(sortedDeck)
         if(!sortedDeck[name]){
           sortedDeck[name] = true;
           return true
@@ -74,8 +73,8 @@ function getPlanes() {
       })
       
       const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
+      // console.log(sortedType)
       console.log(sortedType)
-      return sortedType
       //This function will sort the filtered deck array by type, (plane & phenomenon)and then split it. I need to ask the user how many players they have and then add that many phenomenon cards or whatever. We could ball.
 
 
