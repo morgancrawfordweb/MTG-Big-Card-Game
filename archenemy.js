@@ -176,29 +176,19 @@ function undoRemoveCard() {
    
 //!
 //?Maybe I can check to see the card type after each button click. The loop will be continuously running Like an arrow button that shuffles through array. for(let i=0:i<=array.length;i++){show array[i] until i click the next arrow or back arrow.}
-//TODO Need a way to sort the schemes. Use this code:
-//!
+//TODO Need a way to sort the schemes. Im using this code to seperate the ongoing schemes from the regular schemes. I cna use .includes() to check and see if it is true that the type includes 'Ongoing' if it does, when i click on it, I want it to stay up because its ongoing'. If(type.includes('Ongoing'){push this to the dom in a seperate div, where when i click on it again it goes away'})Use this code:
 
-//TODO const filteredDeck = deck.filter((deck)=>{
-//TODO  const name = deck.name
 
-//TODO   const sortByPhenomenon = function(a,b){
-//TODO     if(a.type === 'Phenomenon' && b.type !=='Phenomenon'){
-//TODO       return -1
-//TODO     }else if(a.type !== 'Phenomenon' && b.type ==='Phenomenon'){
-//TODO       return 1
-//TODO     }else{
-//TODO       return a.name.localeCompare(b.name)
-//TODO     }
-//TODO   }
-//TODO   sortByPhenomenon(deck)
+ const filteredDeck = deck.filter((deck)=>{
+  const name = deck.name
+
   
-//TODO   if(!sortedDeck[name]){
-//TODO     sortedDeck[name] = true;
-//TODO     return true
-//TODO   }
-//TODO   return false;
-//TODO })
+   if(!sortedDeck[name]){
+     sortedDeck[name] = true;
+     return true
+   }
+   return false;
+ })
 
 
 

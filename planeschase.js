@@ -5,13 +5,12 @@
 
 
 
-
 // Adding event listener to the 'planes' element
 document.getElementById('planes').addEventListener('click', getPlanes);
 
 // Function to fetch planechase cards from the API
 function getPlanes() {
-  const planechaseDeck = [];
+  var planechaseDeck = [];
   const phenomenonDeck = [];
 
   // Function to fetch cards from a specific page
@@ -49,7 +48,7 @@ function getPlanes() {
   //button to fetch all of the cards and put them inside of my planeschase array
   fetchAllCards()
     .then(deck => {
-      console.log(planechaseDeck)
+
       const sortedDeck = {}
       
       // This functions filters out the planar deck by only adding decks with a unique name. Functoin checks to see if the name already exists, if it does then it gets returned, otherwise it stays.
@@ -72,11 +71,32 @@ function getPlanes() {
         return false;
       })
       
-      const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
-      // console.log(sortedType)
-      console.log(sortedType)
-      //This function will sort the filtered deck array by type, (plane & phenomenon)and then split it. I need to ask the user how many players they have and then add that many phenomenon cards or whatever. We could ball.
 
+
+
+      
+      function shuffleDeck(){
+        var randomizePlanarDeck=function(array){
+          var m=array.length,t,i;
+        
+          while(m){
+            //this picks the remaining element
+            i=Math.floor(Math.random()*m--);
+        
+            //this swaps that with the current element
+            t=array[m];
+            array[m]=array[i];
+            array[i]=t;
+          }
+          return array;
+        }
+        
+        randomizePlanarDeck(sortedType)
+        // console.log(sortedType)
+        }
+      shuffleDeck()
+      const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
+      console.log(sortedType)
 
     })
     .catch(err => {
@@ -84,5 +104,7 @@ function getPlanes() {
     });
     
 }
+
+
 
 
