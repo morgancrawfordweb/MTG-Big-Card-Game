@@ -27,6 +27,9 @@ const archEnemyDeck = [];
 //*This sets the most of the same cards you can have in an array/
 const maxCardCount = 2
 
+let removedCard = null;
+
+
 
 document.getElementById('schemes').addEventListener('click', getSchemes)
 
@@ -65,7 +68,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
           if (pickedCount < maxCardCount) {
             addCardToDeck(selectedCard);
           } else {
-            removeCardFromDeck(selectedCard);
+            twoCardLimit(selectedCard);
           }
         }
       });
@@ -83,10 +86,14 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
   
   function addCardToDeck(card) {
     archEnemyDeck.push(card);
+
+    //console log works and shows the array of cards inside of this.
+    console.log(archEnemyDeck)
     renderArchEnemyDeck();
   }
   
-  function removeCardFromDeck(card) {
+  //This gives me the ability to remove a card and not go over 2 of that card. 
+  function twoCardLimit(card) {
     const index = archEnemyDeck.findIndex(c => c.id === card.id);
     if (index !== -1) {
       archEnemyDeck.splice(index, 1);
@@ -112,18 +119,15 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
     });
   }
   
-  // Add Undo button only if a card was removed
-  if (removedCard) {
-    const undoButton = document.getElementById('undo');
-    undoButton.textContent = 'Undo';
-    undoButton.addEventListener('click', undoRemoveCard);
-  }
 
-function undoRemoveCard() {
-  if (removedCard) {
-    addCardToDeck(removedCard); // Add the removed card back to the deck
+  function undo() {
+    archEnemyDeck.pop();
+    renderArchEnemyDeck();
+    console.log(archEnemyDeck);
   }
-}
+  
+  document.getElementById('undo').addEventListener('click', undo);
+  
 
   // Call the attachClickListeners() function to attach event listeners to the cards
   attachClickListeners();
@@ -146,6 +150,17 @@ function undoRemoveCard() {
   }
 
    
+  //  This code works!!!! it just doesnt re-render on its own. its not react lol
+
+  
+   document.getElementById('undo').addEventListener('click', undo)
+   function undo(){
+     archEnemyDeck.pop()
+     const parentElement = document.getElementById("archEnemyDraftPicks")
+    //  parentElement.removeChild('li')
+     console.log(archEnemyDeck)
+     renderArchEnemyDeck()
+   }
    
    //
    //
@@ -179,52 +194,72 @@ function undoRemoveCard() {
 //TODO Need a way to sort the schemes. Im using this code to seperate the ongoing schemes from the regular schemes. I cna use .includes() to check and see if it is true that the type includes 'Ongoing' if it does, when i click on it, I want it to stay up because its ongoing'. If(type.includes('Ongoing'){push this to the dom in a seperate div, where when i click on it again it goes away'})Use this code:
 
 
- const filteredDeck = deck.filter((deck)=>{
-  const name = deck.name
+//This code filters the deck on the planeschase but not this one for some reason
+
+//  const filteredDeck = deck.filter((deck)=>{
+//   const name = deck.name
 
   
-   if(!sortedDeck[name]){
-     sortedDeck[name] = true;
-     return true
-   }
-   return false;
- })
+//    if(!sortedDeck[name]){
+//      sortedDeck[name] = true;
+//      return true
+//    }
+//    return false;
+//  })
 
 
+//this function will have a way to run through the array with arrow buttons that
+//Need to change the CSS to make the card big and cover up the whole screen, and if the scheme is ongoing put it in the bottom corner or be text overlaying the image on the bottom of the screen.
+document.getElementById('beginGame').addEventListener ('click', beginGame)
 
+function beginGame(archEnemyDeck){
 
-   //This will remove the card from your potential deck
-  //  document.getElementById('undo').addEventListener('click', undo)
-  //  function undo(){
-  //    archEnemyDeck.pop()
-  //    const parentElement = document.getElementById("archEnemyDraftPicks")
-  //    parentElement.removeChild('li')
-  //    console.log(archEnemyDeck)
-  //  }
+  //change the CSS and a
+  let shownCard = 0;
+//nextScheme previousScheme
 
+  function updateCard(archEnemyDeck){
 
-//Function for saving deck to local storage in-case anything happens to it or you accidentally leave the game. 
-const savedDecks=[]
-document.getElementById('submitForLocalStorage').addEventListener('click', saveDeck)
-function saveDeck(deck){
-  
-  savedDecks.push(deck)
-  saveDecksToLocalStorage();
-}
-
-function saveDecksToLocalStorage() {
-  localStorage.setItem('decks', JSON.stringify(decks));
-}
-
-// Load the decks from local storage
-function loadDecksFromLocalStorage() {
-  const savedDecks = localStorage.getItem('decks');
-  if (savedDecks) {
-    decks = JSON.parse(savedDecks);
+    //rendering the card from the array
+         const result = document.getElementById('')
   }
+
+
+
+
 }
 
-// Retrieve decks from local storage
-loadDecksFromLocalStorage();
 
-saveDeck(archEnemyDeck)
+
+
+// //Function for saving deck to local storage in-case anything happens to it or you accidentally leave the game. 
+// const savedDecks=[]
+// document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
+// function saveDeck(deck){
+//   console.log('saved your deck')
+//   savedDecks.push(deck)
+//   saveDecksToLocalStorage();
+// }
+
+// function saveDecksToLocalStorage() {
+//   localStorage.setItem('decks', JSON.stringify(decks));
+// }
+
+// // Load the decks from local storage
+// function loadDecksFromLocalStorage() {
+//   const savedDecks = localStorage.getItem('decks');
+//   if (savedDecks) {
+//     decks = JSON.parse(savedDecks);
+//   }
+// }
+
+// // Retrieve decks from local storage
+// loadDecksFromLocalStorage();
+
+// saveDeck(archEnemyDeck)
+
+
+
+
+
+
