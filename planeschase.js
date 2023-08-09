@@ -25,11 +25,9 @@ function getPlanes() {
   function fetchAllCards() {
     const totalPages = 10; // Total number of pages you want to retrieve (adjust this value based on your needs)
     const fetchPromises = [];
-
     for (let page = 1; page <= totalPages; page++) {
       fetchPromises.push(fetchCardsByPage(page));
     }
-
     // Resolving all fetch promises
     return Promise.all(fetchPromises)
       .then(results => {
@@ -40,9 +38,9 @@ function getPlanes() {
             }
           });
         });
-        
         return planechaseDeck;
       });
+      
   }
 
   //button to fetch all of the cards and put them inside of my planeschase array
@@ -54,16 +52,6 @@ function getPlanes() {
       // This functions filters out the planar deck by only adding decks with a unique name. Functoin checks to see if the name already exists, if it does then it gets returned, otherwise it stays.
       const filteredDeck = deck.filter((deck)=>{
         const name = deck.name
-        
-        // const sortByPhenomenon = function(a,b){
-        //   if(a.type == 'Phenomenon' && b.type !='Phenomenon'){
-        //     return -1
-        //   }else if(a.type != 'Phenomenon' && b.type =='Phenomenon'){
-        //     return 1
-        //   }
-        // }
-        // sortByPhenomenon(deck)
-        // console.log(sortedDeck)
         if(!sortedDeck[name]){
           sortedDeck[name] = true;
           return true
@@ -74,6 +62,11 @@ function getPlanes() {
 
 
 
+
+      
+//filtered deck gives me the entire array of objects that i need.
+console.log(filteredDeck)
+document.getElementById('shuffle').addEventListener('click', shuffleDeck)
       
       function shuffleDeck(){
         var randomizePlanarDeck=function(array){
@@ -90,15 +83,15 @@ function getPlanes() {
           }
           return array;
         }
-        
+        console.log(sortedType)
         randomizePlanarDeck(sortedType)
         // console.log(sortedType)
         }
       shuffleDeck()
       const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
-      console.log(sortedType)
+      // console.log(sortedType)
 
-    })
+      })
     .catch(err => {
       console.log(`error ${err}`);
     });

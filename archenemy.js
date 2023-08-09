@@ -210,20 +210,28 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 
 //this function will have a way to run through the array with arrow buttons that
 //Need to change the CSS to make the card big and cover up the whole screen, and if the scheme is ongoing put it in the bottom corner or be text overlaying the image on the bottom of the screen.
+
+//*I need a function that will show the main card. Move the card to the next card, move it to the previous card, display, acknowledge and delete an ongoing scheme.
+
+//* I need a way to chose when the game is over, if you want to play again, which will make a notification then shuffle up the deck again, or if a user wants to create a whole new deck.
 document.getElementById('beginGame').addEventListener ('click', beginGame)
 
 function beginGame(archEnemyDeck){
 
   //change the CSS and a
+  //this will be the array that will show the card face up
+  
   let shownCard = 0;
 //nextScheme previousScheme
+  console.log('hello')
 
   function updateCard(archEnemyDeck){
-
+console.log('updateCard')
     //rendering the card from the array
          const result = document.getElementById('')
+         return
   }
-
+updateCard()
 
 
 
