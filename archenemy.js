@@ -1,5 +1,7 @@
 //This will double as the planeschase portion and archenemy portion.
 
+const { arch } = require("os");
+
 //Archenemy game works as 1v3.
 //Archenemy deck consists of shemes. Each scheme does something else, and you can have AT LEAST 20 Scheme Cards && you cant have more than 2 of the same cards.
 //* What we know is that their are two rules. 
@@ -28,7 +30,6 @@ const archEnemyDeck = [];
 const maxCardCount = 2
 
 let removedCard = null;
-
 
 
 document.getElementById('schemes').addEventListener('click', getSchemes)
@@ -133,7 +134,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
   attachClickListeners();
   
   function getSchemes() {
-    console.log('working');
+    console.log('working on getting schemes');
     fetchSchemes()
       .then(data => {
         data.cards.forEach(card => {
@@ -157,6 +158,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
    function undo(){
      archEnemyDeck.pop()
      const parentElement = document.getElementById("archEnemyDraftPicks")
+     console.log("Undo was completed");
     //  parentElement.removeChild('li')
      console.log(archEnemyDeck)
      renderArchEnemyDeck()
@@ -185,6 +187,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
    }
    
    randomizeArray(schemeDeck)
+   renderArchEnemyDeck(schemeDeck)
    console.log(schemeDeck)
    }
    
@@ -216,11 +219,16 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 //* I need a way to chose when the game is over, if you want to play again, which will make a notification then shuffle up the deck again, or if a user wants to create a whole new deck.
 document.getElementById('beginGame').addEventListener ('click', beginGame)
 
-function beginGame(archEnemyDeck){
+function beginGame(){
 
-  //change the CSS and a
-  //this will be the array that will show the card face up
-  
+  // function archenemyLayout(){
+
+      //change the CSS and a
+      //this will be the array that will show the card face up
+
+  // }
+
+  console.log(archEnemyDeck)
   let shownCard = 0;
 //nextScheme previousScheme
   console.log('hello')
@@ -241,28 +249,24 @@ updateCard()
 
 
 // //Function for saving deck to local storage in-case anything happens to it or you accidentally leave the game. 
-// const savedDecks=[]
-// document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
-// function saveDeck(deck){
-//   console.log('saved your deck')
-//   savedDecks.push(deck)
-//   saveDecksToLocalStorage();
-// }
+//Im able to save decks, at least one.
+//* I need a way to grab from a list of saved decks. Maybe have an input form so that someone can name them.
+document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
+function saveDeck(){
+  localStorage.setItem('savedDecks', archEnemyDeck)
+  console.log('saved your deck')
+}
 
-// function saveDecksToLocalStorage() {
-//   localStorage.setItem('decks', JSON.stringify(decks));
-// }
 
-// // Load the decks from local storage
-// function loadDecksFromLocalStorage() {
-//   const savedDecks = localStorage.getItem('decks');
-//   if (savedDecks) {
-//     decks = JSON.parse(savedDecks);
-//   }
-// }
+// Load the decks from local storage. Maybe I can pick a modal or open up a new window so that the user can pick and choose which deck they want to do. This isnt necessary for the MVP, but it will be the next feature that should be added.
+document.getElementById('loadDeckFromLocalStorage').addEventListener ('click', loadDeck)
+function loadDecksFromLocalStorage() {
+  const savedDecks = localStorage.getItem('decks');
+  savedDecks=archEnemyDeck
+}
 
-// // Retrieve decks from local storage
-// loadDecksFromLocalStorage();
+// Retrieve decks from local storage
+loadDecksFromLocalStorage();
 
 // saveDeck(archEnemyDeck)
 

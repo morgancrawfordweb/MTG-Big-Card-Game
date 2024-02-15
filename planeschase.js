@@ -2,7 +2,7 @@
 
 //* This game is very fun, and this will be modified. In which, the top 4 other planes in the deck, you will be able to go to each one individually. This rewards the roller.
 
-const sortedDeck=[]
+const sortedPlanesDeck=[]
 
 
 // Adding event listener to the 'planes' element
@@ -14,18 +14,19 @@ function getPlanes() {
   const phenomenonDeck = [];
 
   // Function to fetch cards from a specific page
-  function fetchCardsByPage(page) {
+  function fetchPlanesByPage(page) {
     const planechaseCatalog = `https://api.magicthegathering.io/v1/cards?layout=planar&page=${page}`;
     return fetch(planechaseCatalog)
       .then(res => res.json())
       .then(data => data.cards);
   }
+
   // Function to fetch all cards from all pages
-  function fetchAllCards() {
+  function fetchAllPlanes() {
     const totalPages = 10; // Total number of pages you want to retrieve (adjust this value based on your needs)
     const fetchPromises = [];
     for (let page = 1; page <= totalPages; page++) {
-      fetchPromises.push(fetchCardsByPage(page));
+      fetchPromises.push(fetchPlanesByPage(page));
     }
     // Resolving all fetch promises
     return Promise.all(fetchPromises)
@@ -42,22 +43,23 @@ function getPlanes() {
   }
 
   //button to fetch all of the cards and put them inside of my planeschase array
-  fetchAllCards()
+  fetchAllPlanes()
     .then(deck => {
 
-      const sortedDeck = {}
+      const sortedPlanesDeck = {}
       
       // This functions filters out the planar deck by only adding decks with a unique name. Functoin checks to see if the name already exists, if it does then it gets returned, otherwise it stays.
       const filteredDeck = deck.filter((deck)=>{
         const name = deck.name
-        if(!sortedDeck[name]){
-          sortedDeck[name] = true;
+        if(!sortedPlanesDeck[name]){
+          sortedPlanesDeck[name] = true;
           return true
         }
         return false;
       })
-//filtered deck gives me the entire array of objects that i need.
+//filtered deck gives me the entire array of objects that i need. They are sorted to remove any dupliate named planes
 console.log(filteredDeck)
+    
 document.getElementById('shuffle').addEventListener('click', shuffleDeck)
       
       function shuffleDeck(){
@@ -74,21 +76,47 @@ document.getElementById('shuffle').addEventListener('click', shuffleDeck)
             array[i]=t;
           }
           return array;
+          
         }
-        console.log(sortedType)
+        // randomizePlanarDeck(sortedType)
+        renderPlanesChaseDeck(sortedPlanesDeck);
+        
+
+        //?I think i need to render the cards right after they have been loaded up
+        //? I need to figure out a way to do all of this at one time.
+
+
+        function renderPlanesChaseDeck() {
+          const parentElement = document.getElementById("listOfPlanes");
+          parentElement.innerHTML = '';
+          sortedType.forEach(card => {
+            const pickedCount = countCardInDeck(card);
+            if (pickedCount <= maxCardCount) {
+              const li = document.createElement('li');
+              const img = document.createElement('img');
+              img.src = card.imageUrl;
+              img.className = 'cardImage';
+              img.dataset.id = card.id;
+              li.appendChild(img);
+              parentElement.appendChild(li);
+            }
+          });
+        }
         randomizePlanarDeck(sortedType)
-        // console.log(sortedType)
+        renderArchEnemyDeck(sortedType)
+        
         }
-      shuffleDeck()
-      const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
-      // console.log(sortedType)
+        
+        //*shuffle function works!
+        const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
+      shuffleDeck(sortedType)
+      
 
       })
     .catch(err => {
       console.log(`error ${err}`);
     });
 }
-
 
 //!Code that needs to be reviewed 
 //!Code that needs to be reviewed 
@@ -114,7 +142,7 @@ document.getElementById('shuffle').addEventListener('click', shuffleDeck)
 
 //!Need to convert the Archenemy stuff to Planeschase Stuff
 function countCardInDeck(card) {
-  const count = archEnemyDeck.reduce((total, currentCard) => {
+  const count = sortedType.reduce((total, currentCard) => {
     return currentCard.id === card.id ? total + 1 : total;
   }, 0);
   return count;
@@ -128,33 +156,41 @@ function addCardToDeck(card) {
   renderArchEnemyDeck();
 }
 
+//TODO -A shared planar deck also cannot contain more phenomenon cards than 2 times the number of players in the game. 
+//?---------------------//?
+//TODO -Individual planar decks should contain at least 10 cards, including no more than 2 phenomenon cards.
+//?---------------------//?
+//TODO: Change all of this to reflect the planes instead of schemes.
+
+
+//! Change archenemy deck to filtered deck 11/2/23
 //This gives me the ability to remove a card and not go over 2 of that card. 
-function twoCardLimit(card) {
-  const index = archEnemyDeck.findIndex(c => c.id === card.id);
-  if (index !== -1) {
-    archEnemyDeck.splice(index, 1);
-    console.log('worked')
-    renderArchEnemyDeck();
-  }
-}
+// function twoCardLimit(card) {
+//   const index = archEnemyDeck.findIndex(c => c.id === card.id);
+//   if (index !== -1) {
+//     archEnemyDeck.splice(index, 1);
+//     console.log('worked')
+//     renderArchEnemyDeck();
+//   }
+// }
 
 
-function renderArchEnemyDeck() {
-  const parentElement = document.getElementById("listOfPlanes");
-  parentElement.innerHTML = '';
-  archEnemyDeck.forEach(card => {
-    const pickedCount = countCardInDeck(card);
-    if (pickedCount <= maxCardCount) {
-      const li = document.createElement('li');
-      const img = document.createElement('img');
-      img.src = card.imageUrl;
-      img.className = 'cardImage';
-      img.dataset.id = card.id;
-      li.appendChild(img);
-      parentElement.appendChild(li);
-    }
-  });
-}
+// function renderArchEnemyDeck() {
+//   const parentElement = document.getElementById("listOfPlanes");
+//   parentElement.innerHTML = '';
+//   archEnemyDeck.forEach(card => {
+//     const pickedCount = countCardInDeck(card);
+//     if (pickedCount <= maxCardCount) {
+//       const li = document.createElement('li');
+//       const img = document.createElement('img');
+//       img.src = card.imageUrl;
+//       img.className = 'cardImage';
+//       img.dataset.id = card.id;
+//       li.appendChild(img);
+//       parentElement.appendChild(li);
+//     }
+//   });
+// }
 
 
 function undo() {
@@ -163,4 +199,4 @@ function undo() {
   console.log(archEnemyDeck);
 }
 
-document.getElementById('undo').addEventListener('click', undo);
+// document.getElementById('undo').addEventListener('click', undo);

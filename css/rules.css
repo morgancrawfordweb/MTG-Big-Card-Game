@@ -1,0 +1,159 @@
+/* Box Model Hack */
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Clear fix hack */
+  .clearfix:after {
+       content: ".";
+       display: block;
+       clear: both;
+       visibility: hidden;
+       line-height: 0;
+       height: 0;
+  }
+  
+  .clear {
+      clear: both;
+  }
+  
+  /******************************************
+  /* BASE STYLES
+  /*******************************************/
+  
+  body {
+      background-color: rgb(224, 219, 255);
+  
+  }
+  
+  
+  /******************************************
+  /* LAYOUT
+  /*******************************************/
+  header {
+  
+  }
+  
+  footer {
+  
+  }
+  
+  *{
+    
+  }
+  /******************************************
+  /* ADDITIONAL STYLES
+  /*******************************************/
+  
+  h1{
+      color: rgb(0, 0, 0);
+  }
+  /* ol img{
+      width: 50%;
+  } */
+
+  /*Need To change this for mobile screens mostly*/
+  ol{
+    display: inline-flex;
+    width: 95%;
+    overflow: auto;
+  }
+
+  li{
+    list-style-type: none;
+    padding: 15px;
+  }
+  nav *{
+    display: inline;
+  }
+
+
+  .top2{
+    display: flex;
+    width: 100%;
+  }
+  .bottom2{
+    display: flex;
+  }
+  .currentPlane{
+    display: flex;
+    align-content: center;
+  }
+  #planeschaseExample *{
+    width: 75%
+  }
+  a{
+    color: rgb(250, 113, 1);
+  }
+
+
+  /* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Menu styles */
+.menu {
+  display: none; /* Hide the menu by default */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 10px;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Hamburger styles */
+.menu-toggle {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger {
+  background-color: #fff;
+  height: 2px;
+  width: 20px;
+  transition: all 0.3s ease;
+}
+
+.hamburger:before,
+.hamburger:after {
+  background-color: #fff;
+  content: '';
+  display: block;
+  height: 2px;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Transform the hamburger icon into a close icon
+.open .hamburger {
+  transform: rotate(45deg);
+}
+
+.open .hamburger:before {
+  transform: rotate(-45deg) translate(-5px, -6px);
+}
+
+.open .hamburger:after {
+  opacity: 0;
+} */
+.title{
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+
+.rules-plane{
+    justify-items: center;
+}
