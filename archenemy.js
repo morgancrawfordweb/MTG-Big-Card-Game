@@ -1,20 +1,15 @@
 //This will double as the planeschase portion and archenemy portion.
 
-const { arch } = require("os");
+// const { arch } = require("os");
 
 //Archenemy game works as 1v3.
 //Archenemy deck consists of shemes. Each scheme does something else, and you can have AT LEAST 20 Scheme Cards && you cant have more than 2 of the same cards.
 //* What we know is that their are two rules. 
 //?Rule 1: The array length must be at least 20, or greater than 19.
-//?Rule 2: The array cant contain more than 2 of the same items. So i will need to use a filter method to find them. Maybe check for the same name and if they are they cant submit the deck.
 
 
 //*How i picture the application to work.
 //* (1)Their will be a grid on the main page. The grid will show up in rows of 2 or 3, whatever fits better on mobile. (2)The the user can scroll down to whichever ones the want to click and it will be treated like google images where you can pick multiple before submitting. (3) After submitting, this will create the deck, and that way you and go forward through the deck and "draw" cards. (4)After the scheme deck is finished, we can make the option to pick new cards, or shuffle your scheme deck. If you shuffle the game still continues. 
-
-//TODO 1: Use the data from the fetch API below and lay out the images in an HTML document with CSS grid options for easy lineup. Each image will also be a button, if you click it, I will have web-kit animations to zoom forward and make that one known its selected. If you click it again, revert the changes like normal. After its selected, their will be a counter of how many documents are in the array or "deck".
-
-//TODO 2: have a function where that if they were clicked once, set the web-kit animation off. If the animation is still on when they submit, then save the array maybe? or something else or even a black border around it. I need to set a flag for each one clicked. If it is clicked then give the flag +1, if it is clicked AGAin, make it 0. 1 will be slotted for the deck, the 0 wont be.
 
 //TODO 3: Their will be two buttons. one to move forward more into the array, the other to the previous. So i will probably need a loop, and then have to have the index go back and forth with each button press.
 
@@ -164,9 +159,9 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
      renderArchEnemyDeck()
    }
    
-   //
-   //
-   //
+   
+
+   
    //*randomize array right here
    document.getElementById("shuffle").addEventListener ('click', shuffleDeck)
    //!This function works shuffling the scheme deck array. This is the base. All i need to do now is to set up a playerDeck for the cards the user wants, and then put that array through this function.
@@ -219,19 +214,28 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 //* I need a way to chose when the game is over, if you want to play again, which will make a notification then shuffle up the deck again, or if a user wants to create a whole new deck.
 document.getElementById('beginGame').addEventListener ('click', beginGame)
 
+
+//*Remove all other elements on the page, changing their display to hidden, while switching the other "carosuel" elements onto the bottom of the page, right now lets just populate the loadedDeck html so that we can make moves with that first LETSGOOOOO BB
 function beginGame(){
 
-  // function archenemyLayout(){
+  // Load the decks from local storage. Maybe I can pick a modal or open up a new window so that the user can pick and choose which deck they want to do. This isnt necessary for the MVP, but it will be the next feature that should be added.
+document.getElementById('loadDeckFromLocalStorage').addEventListener ('click', loadDecksFromLocalStorage)
+const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
+function loadDecksFromLocalStorage() {
+  return storedDeck
+  
+}
 
-      //change the CSS and a
-      //this will be the array that will show the card face up
 
-  // }
+console.log('hello')
+// Retrieve decks from local storage
+loadDecksFromLocalStorage();
 
-  console.log(archEnemyDeck)
-  let shownCard = 0;
-//nextScheme previousScheme
-  console.log('hello')
+const parentElement = document.getElementById(loadedDeck)
+  console.log(storedDeck)
+  for (let i=0;i<storedDeck.length;i++){
+    parentElement.appendChild(storedDeck)
+  }
 
   function updateCard(archEnemyDeck){
 console.log('updateCard')
@@ -253,22 +257,15 @@ updateCard()
 //* I need a way to grab from a list of saved decks. Maybe have an input form so that someone can name them.
 document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
 function saveDeck(){
-  localStorage.setItem('savedDecks', archEnemyDeck)
+  localStorage.setItem('savedDecks', JSON.stringify(archEnemyDeck))
   console.log('saved your deck')
 }
 
 
-// Load the decks from local storage. Maybe I can pick a modal or open up a new window so that the user can pick and choose which deck they want to do. This isnt necessary for the MVP, but it will be the next feature that should be added.
-document.getElementById('loadDeckFromLocalStorage').addEventListener ('click', loadDeck)
-function loadDecksFromLocalStorage() {
-  const savedDecks = localStorage.getItem('decks');
-  savedDecks=archEnemyDeck
-}
 
-// Retrieve decks from local storage
-loadDecksFromLocalStorage();
 
-// saveDeck(archEnemyDeck)
+
+
 
 
 

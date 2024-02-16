@@ -65,15 +65,28 @@
           <div id="potentialDeck">
             <ol id="archEnemyDraftPicks"></ol>
           </div>
-
+          <br></br>
+          <div id="loadedDeck"></div>
+            <p>THIS IS WHERE THE PLAY AREA IS</p>
+            <br></br>
           <div>
             <button id="undo">Undo</button>
             <button id="submitForLocalStorage">Save Deck</button>
             <button id="loadDeckFromLocalStorage">Load Deck</button>
-            <button id="beginGame" href="PlayArea.html">Begin Match!</button>
+            <button id="beginGame">Begin Match!</button>
           </div>
           
       </div>
+
+
+
+      <button class='hidden' id="beginGame">Begin Game</button>
+      <section>
+    <section class='hidden' id="archEnemyPlayArea">
+    </section>
+    <button class='hidden' id="previousScheme"><</button>
+    <button class='hidden' id="nextScheme">></button>
+      </section>
       
 <!-- For CSS for my playable area, I would like the entire plane to envelop the screen with 2 arrows hovering to go forward and backward in the deck, when an ongoing scheme hits, make it hover on the top left or right of the screen or maybe have text that says "ongoing scheme" on top that when you click on it it goes to that scheme. -->
     
