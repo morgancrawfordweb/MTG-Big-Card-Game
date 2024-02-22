@@ -181,7 +181,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
      return array;
    }
    
-   randomizeArray(schemeDeck)
+   randomizeArray(array)
    renderArchEnemyDeck(schemeDeck)
    console.log(schemeDeck)
    }
@@ -216,39 +216,70 @@ document.getElementById('beginGame').addEventListener ('click', beginGame)
 
 
 //*Remove all other elements on the page, changing their display to hidden, while switching the other "carosuel" elements onto the bottom of the page, right now lets just populate the loadedDeck html so that we can make moves with that first LETSGOOOOO BB
-function beginGame(){
+// function beginGame(){
+//   // Load the decks from local storage. Maybe I can pick a modal or open up a new window so that the user can pick and choose which deck they want to do. This isnt necessary for the MVP, but it will be the next feature that should be added.
+// document.getElementById('loadDeckFromLocalStorage').addEventListener ('click', loadDecksFromLocalStorage)
 
-  // Load the decks from local storage. Maybe I can pick a modal or open up a new window so that the user can pick and choose which deck they want to do. This isnt necessary for the MVP, but it will be the next feature that should be added.
-document.getElementById('loadDeckFromLocalStorage').addEventListener ('click', loadDecksFromLocalStorage)
-const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
-function loadDecksFromLocalStorage() {
-  return storedDeck
+// function loadDecksFromLocalStorage() {
+//   const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
+//   return storedDeck
+// }
+// //Retrieve decks from local storage
+// loadDecksFromLocalStorage();
+
+// const parentElement = document.getElementById(loadedDeck)
+//   console.log(storedDeck)
+//   for (let i=0;i<storedDeck.length;i++){
+//     const li = document.createElement('li')
+//     li.textContent = storedDeck[i]
+//     parentElement.appendChild(li)
+//   }
+
+//   function updateCard(archEnemyDeck){
+// console.log('updateCard')
+//     //rendering the card from the array
+//          const result = document.getElementById('')
+//          return
+//   }
+// updateCard()
+
+
+
+// }
+function beginGame() {
+
   
-}
+  // Load the decks from local storage.
+  document.getElementById('loadDeckFromLocalStorage').addEventListener('click', loadDecksFromLocalStorage);
 
-
-console.log('hello')
-// Retrieve decks from local storage
-loadDecksFromLocalStorage();
-
-const parentElement = document.getElementById(loadedDeck)
-  console.log(storedDeck)
-  for (let i=0;i<storedDeck.length;i++){
-    parentElement.appendChild(storedDeck)
+  function loadDecksFromLocalStorage() {
+    const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
+    return storedDeck;
   }
 
-  function updateCard(archEnemyDeck){
-console.log('updateCard')
-    //rendering the card from the array
-         const result = document.getElementById('')
-         return
+  // Retrieve decks from local storage
+  const loadedDeckId = 'loadedDeck'; // Assuming 'loadedDeck' is the ID you want to target
+  const storedDeck = loadDecksFromLocalStorage();
+  const parentElement = document.getElementById(loadedDeckId);
+
+  if (parentElement && storedDeck) {
+    for (let i = 0; i < storedDeck.length; i++) {
+      const li = document.createElement('li');
+      const img = document.createElement('img')
+      img.src= storedDeck[i].imageUrl
+      li.appendChild(img)
+      parentElement.appendChild(li);
+    }
   }
-updateCard()
 
-
-
+  function updateCard(archEnemyDeck) {
+    console.log('updateCard');
+    // rendering the card from the array
+    const result = document.getElementById('');
+    return result;
+  }
+  updateCard();
 }
-
 
 
 
@@ -262,7 +293,17 @@ function saveDeck(){
 }
 
 
+document.getElementById('clearDeck').addEventListener('click', clearDeck)
+function clearDeck(){
+  localStorage.removeItem('savedDecks', JSON.stringify(archEnemyDeck))
+}
 
+// document.getElementById('stageArena').addEventListener('click', stageArena)
+// function stageArena(){
+//   localStorage.removeItem('savedDecks', JSON.stringify(archEnemyDeck))
+
+// window.location.href='ArchenemyArena.html'
+// }
 
 
 
