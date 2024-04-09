@@ -212,7 +212,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 //*I need a function that will show the main card. Move the card to the next card, move it to the previous card, display, acknowledge and delete an ongoing scheme.
 
 //* I need a way to chose when the game is over, if you want to play again, which will make a notification then shuffle up the deck again, or if a user wants to create a whole new deck.
-document.getElementById('beginGame').addEventListener ('click', beginGame)
+// document.getElementById('beginGame').addEventListener ('click', beginGame)
 
 
 //*Remove all other elements on the page, changing their display to hidden, while switching the other "carosuel" elements onto the bottom of the page, right now lets just populate the loadedDeck html so that we can make moves with that first LETSGOOOOO BB
@@ -246,40 +246,40 @@ document.getElementById('beginGame').addEventListener ('click', beginGame)
 
 
 // }
-function beginGame() {
+// function beginGame() {
 
   
-  // Load the decks from local storage.
-  document.getElementById('loadDeckFromLocalStorage').addEventListener('click', loadDecksFromLocalStorage);
+//   // Load the decks from local storage.
+//   document.getElementById('loadDeckFromLocalStorage').addEventListener('click', loadDecksFromLocalStorage);
 
-  function loadDecksFromLocalStorage() {
-    const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
-    return storedDeck;
-  }
+//   function loadDecksFromLocalStorage() {
+//     const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
+//     return storedDeck;
+//   }
 
-  // Retrieve decks from local storage
-  const loadedDeckId = 'loadedDeck'; // Assuming 'loadedDeck' is the ID you want to target
-  const storedDeck = loadDecksFromLocalStorage();
-  const parentElement = document.getElementById(loadedDeckId);
+//   // Retrieve decks from local storage
+//   const loadedDeckId = 'loadedDeck'; // Assuming 'loadedDeck' is the ID you want to target
+//   const storedDeck = loadDecksFromLocalStorage();
+//   const parentElement = document.getElementById(loadedDeckId);
 
-  if (parentElement && storedDeck) {
-    for (let i = 0; i < storedDeck.length; i++) {
-      const li = document.createElement('li');
-      const img = document.createElement('img')
-      img.src= storedDeck[i].imageUrl
-      li.appendChild(img)
-      parentElement.appendChild(li);
-    }
-  }
+//   if (parentElement && storedDeck) {
+//     for (let i = 0; i < storedDeck.length; i++) {
+//       const li = document.createElement('li');
+//       const img = document.createElement('img')
+//       img.src= storedDeck[i].imageUrl
+//       li.appendChild(img)
+//       parentElement.appendChild(li);
+//     }
+//   }
 
-  function updateCard(archEnemyDeck) {
-    console.log('updateCard');
-    // rendering the card from the array
-    const result = document.getElementById('');
-    return result;
-  }
-  updateCard();
-}
+//   function updateCard(archEnemyDeck) {
+//     console.log('updateCard');
+//     // rendering the card from the array
+//     const result = document.getElementById('');
+//     return result;
+//   }
+//   updateCard();
+// }
 
 
 

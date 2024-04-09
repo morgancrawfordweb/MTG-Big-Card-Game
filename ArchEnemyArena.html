@@ -30,14 +30,33 @@
       </li>
       <li>
         <a href="PlanesChase.html">PlanesChase</a>
+        
+      </li>
+      <li>
+        <a href="Archenemy.html">Archenemy</a>
       </li>
       <li>
         <a href="Rules.html">Rules</a>
       </li>
     </ul>
   </nav>
+  <button class='hidden' id="loadDeckFromLocalStorage">Load Deck</button>
   <section>
-    <button id="loadDeckFromLocalStorage">Load Deck</button>
+    
+    <button id="beginGame">Begin Match!</button>
+
+    <div id="playArea">
+      <ol id="loadedDeck"></ol>
+      <div>
+      <ol id="onGoingSchemeArea"></ol>
+      <button id="removeOnGoingScheme">Remove Ongoing Scheme</button>
+      </div>
+
+    <div id="cardNum"></div>
+       <p>THIS IS WHERE THE PLAY AREA IS</p>
+       <br></br>
+     </div>
+
 
   </section>
 
@@ -50,11 +69,11 @@
     <section id="ongoing"></section>
 
         <footer class="schemeButtons">
-            <button id="previousScheme">Previous Scheme</button>
+            <button id="decrementScheme">Previous Scheme</button>
             <button id="onGoing">OnGoing Scheme</button>
-            <button id="nextScheme">Next Scheme</button>
+            <button id="incrementScheme">Next Scheme</button>
         </footer>
     
 </body>
-<script src ="archEnemyArena.js"> </script>
+<script src ="archEnemyArena.js"></script>
 </html>
