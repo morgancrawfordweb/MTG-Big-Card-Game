@@ -39,10 +39,14 @@ function beginGame() {
     // Retrieve decks from local storage
     const loadedDeckId = 'loadedDeck'; // Assuming 'loadedDeck' is the ID you want to target
     const parentElement = document.getElementById(loadedDeckId);
-    const cardNumber = document.getElementById(cardNum);
+    const cardNumber = document.getElementById('cardNum');
     
 
     let currentSchemeIndex = 0
+    let onGoingSchemeArea=null;
+    
+
+
   
     // Function to draw the current card
     function drawCurrentScheme() {
@@ -54,20 +58,41 @@ function beginGame() {
             li.appendChild(img);
 
             if(card.type == 'Ongoing Scheme'){
-              const onGoingSchemeArea = document.getElementById('onGoingSchemeArea')
-              onGoingSchemeArea.innerHTML = ''
+              if(onGoingSchemeArea){
+                onGoingSchemeArea.remove()
+              }
+              
+  
+              onGoingSchemeArea = document.createElement('div');
+              onGoingSchemeArea.classList.add('onGoingSchemeArea');
+              onGoingSchemeArea.dataset.cardIndex = currentSchemeIndex; // Store card index for deletion
+              onGoingSchemeArea.appendChild(li);
+              onGoingSchemeArea.addEventListener('click', removeOngoingScheme); // Add click event listener for deletion
+            document.body.appendChild(onGoingSchemeArea);
+            console.log(`Ongoing Scheme ${currentSchemeIndex}`)
+
+
             }else{
-              console.log('Scheme')
+              console.log(`Scheme ${currentSchemeIndex}`)
+              parentElement.innerHTML = '';
+              parentElement.appendChild(li)
+              
             }
 
-            parentElement.innerHTML = ''; // Clear the parent element before appending the new card
-            parentElement.appendChild(li);
-
-            //*This will allow the user to see how many cards they have left in their deck
-            // cardNumber.textContent = `Scheme ${currentSchemeIndex+1} out of ${shuffledDeck.length}`
+            cardNumber.textContent=`Card ${currentSchemeIndex+1} out of ${shuffledDeck.length}`
 
         }
     }
+    document.getElementById('removeOnGoingScheme').addEventListener('click', removeOngoingScheme)
+    // Function to remove an ongoing scheme
+function removeOngoingScheme() {
+  if(onGoingSchemeArea){
+    //remove the current card in the dom if it is there
+    onGoingSchemeArea.remove();
+    //reset it to null
+    onGoingSchemeArea=null;
+  }
+}
 
     
     //increment function

@@ -41,38 +41,32 @@
     </ul>
   </nav>
   <button class='hidden' id="loadDeckFromLocalStorage">Load Deck</button>
+
+  <h1>Welcome to Archenemy Beta!</h1>
+  <p>Once the counter has reached your total deck length, click 'Begin Match' again to reshuffle your deck. This is still in Beta, so you may also have to remove any additional ongoing schemes in the area</p>
+
   <section>
-    
     <button id="beginGame">Begin Match!</button>
-
-    <div id="playArea">
-      <ol id="loadedDeck"></ol>
-      <div>
-      <ol id="onGoingSchemeArea"></ol>
-      <button id="removeOnGoingScheme">Remove Ongoing Scheme</button>
-      </div>
-
-    <div id="cardNum"></div>
-       <p>THIS IS WHERE THE PLAY AREA IS</p>
-       <br></br>
-     </div>
-
-
   </section>
 
-    
-      
-<!-- For CSS for my playable area, I would like the entire plane to envelop the screen with 2 arrows hovering to go forward and backward in the deck, when an ongoing scheme hits, make it hover on the top left or right of the screen or maybe have text that says "ongoing scheme" on top that when you click on it it goes to that scheme. -->
-    
-<section id="playArea">
-    <section id="mainCard"></section>
-    <section id="ongoing"></section>
 
-        <footer class="schemeButtons">
-            <button id="decrementScheme">Previous Scheme</button>
-            <button id="onGoing">OnGoing Scheme</button>
-            <button id="incrementScheme">Next Scheme</button>
-        </footer>
+<section>
+    <button id="decrementScheme">Previous Scheme</button>
+    <button id="removeOnGoingScheme">Remove Ongoing Scheme</button>
+
+    <button id="incrementScheme">Next Scheme</button>
+    <div id="cardNum"></div>
+</section>
+  <h2>Schemes</h2>
+    <div id="playArea">
+      <ol id="loadedDeck"></ol>
+    </div>
+<h2>Ongoing Schemes</h2>
+
+
+
+        <footer></footer>
+      
     
 </body>
 <script src ="archEnemyArena.js"></script>

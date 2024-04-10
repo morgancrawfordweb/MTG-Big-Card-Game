@@ -148,3 +148,8 @@
 .hidden{
   display: none;
 }
+
+/* CSS for making the schemes appear next to the actual schemes. */
+#ongoingSchemesContainer{
+  position:relative;
+}

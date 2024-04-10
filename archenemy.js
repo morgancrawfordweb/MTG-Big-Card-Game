@@ -33,9 +33,30 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 
    //!This will get my schemes put them in the DOm. When i click on a card, it gets pushed to an array, and then that will be the holding place of my deck.
    function fetchSchemes() {
+
+    const cachedData = localStorage.getItem('cachedSchemes')
+    if(cachedData){
+      return Promise.resolve(JSON.parse(cachedData))
+    }else{
     const url = `https://api.magicthegathering.io/v1/cards?layout=scheme`;
-    return fetch(url).then(res => res.json());
-  }
+    return fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Cache the fetched data locally
+        localStorage.setItem('cachedSchemes', JSON.stringify(data));
+        return data;
+    })
+    .catch(error => {
+        console.error('Error fetching scheme cards:', error);
+        throw error; // Propagate the error for handling
+    });
+}
+}
   
   function renderSchemes(schemeDeck) {
     console.log(schemeDeck)
