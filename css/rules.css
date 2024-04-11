@@ -60,28 +60,51 @@
   }
 
   li{
-    list-style-type: none;
+    list-style-type: disc;
     padding: 15px;
   }
   nav *{
     display: inline;
   }
 
+  #planeschaseExample{
+    display: grid;
+    justify-items: center;
+  }
 
   .top2{
-    display: flex;
     width: 100%;
+    display: inline-flex;
+    justify-content: space-evenly;
   }
+ 
+img{
+  transform: rotate(90deg);
+  width: 15%;
+}
+#current{
+  width: 30%;
+}
+
   .bottom2{
-    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    display: inline-flex;
+    margin-top: -10%;
   }
   .currentPlane{
-    display: flex;
-    align-content: center;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    margin-top: -10%;
   }
-  #planeschaseExample *{
-    width: 75%
-  }
+  
+  /* #planeschaseExample *{
+    width:50%
+  } */
+  /* .currentPlane *{
+    width: 65%;
+  } */
   a{
     color: rgb(250, 113, 1);
   }
@@ -155,5 +178,16 @@
 
 
 .rules-plane{
-    justify-items: center;
+  margin: 0 30%;
+  width: 30%;
+  display: inline-flex;
+  justify-content: center;
+}
+.rules{
+  margin: 0 10%;
+}
+.schemes *{
+  transform: rotate(0deg);
+  display: grid;
+  justify-content: space-evenly;
 }

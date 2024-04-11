@@ -119,6 +119,9 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
     }
   }
   
+  const cardNumber = document.getElementById('cardCounter');
+  const statusOfDeck = document.getElementById('status');
+
   function renderArchEnemyDeck() {
     const parentElement = document.getElementById("archEnemyDraftPicks");
     parentElement.innerHTML = '';
@@ -132,6 +135,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
         img.dataset.id = card.id;
         li.appendChild(img);
         parentElement.appendChild(li);
+        cardNumber.textContent = `Total cards: ${archEnemyDeck.length}`
       }
     });
   }
@@ -167,17 +171,16 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
   }
 
    
-  //  This code works!!!! it just doesnt re-render on its own. its not react lol
-
   
+//This function will undo a card that is submitted to be built if you only have one and you want it gone.
    document.getElementById('undo').addEventListener('click', undo)
    function undo(){
      archEnemyDeck.pop()
      const parentElement = document.getElementById("archEnemyDraftPicks")
      console.log("Undo was completed");
-    //  parentElement.removeChild('li')
      console.log(archEnemyDeck)
      renderArchEnemyDeck()
+     statusOfDeck.textContent = `Undo was completed`
    }
    
    
@@ -206,103 +209,6 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
    renderArchEnemyDeck(schemeDeck)
    console.log(schemeDeck)
    }
-   
-   
-//!
-//?Maybe I can check to see the card type after each button click. The loop will be continuously running Like an arrow button that shuffles through array. for(let i=0:i<=array.length;i++){show array[i] until i click the next arrow or back arrow.}
-//TODO Need a way to sort the schemes. Im using this code to seperate the ongoing schemes from the regular schemes. I cna use .includes() to check and see if it is true that the type includes 'Ongoing' if it does, when i click on it, I want it to stay up because its ongoing'. If(type.includes('Ongoing'){push this to the dom in a seperate div, where when i click on it again it goes away'})Use this code:
-
-
-//This code filters the deck on the planeschase but not this one for some reason
-
-//  const filteredDeck = deck.filter((deck)=>{
-//   const name = deck.name
-
-  
-//    if(!sortedDeck[name]){
-//      sortedDeck[name] = true;
-//      return true
-//    }
-//    return false;
-//  })
-
-
-//this function will have a way to run through the array with arrow buttons that
-//Need to change the CSS to make the card big and cover up the whole screen, and if the scheme is ongoing put it in the bottom corner or be text overlaying the image on the bottom of the screen.
-
-//*I need a function that will show the main card. Move the card to the next card, move it to the previous card, display, acknowledge and delete an ongoing scheme.
-
-//* I need a way to chose when the game is over, if you want to play again, which will make a notification then shuffle up the deck again, or if a user wants to create a whole new deck.
-// document.getElementById('beginGame').addEventListener ('click', beginGame)
-
-
-//*Remove all other elements on the page, changing their display to hidden, while switching the other "carosuel" elements onto the bottom of the page, right now lets just populate the loadedDeck html so that we can make moves with that first LETSGOOOOO BB
-// function beginGame(){
-//   // Load the decks from local storage. Maybe I can pick a modal or open up a new window so that the user can pick and choose which deck they want to do. This isnt necessary for the MVP, but it will be the next feature that should be added.
-// document.getElementById('loadDeckFromLocalStorage').addEventListener ('click', loadDecksFromLocalStorage)
-
-// function loadDecksFromLocalStorage() {
-//   const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
-//   return storedDeck
-// }
-// //Retrieve decks from local storage
-// loadDecksFromLocalStorage();
-
-// const parentElement = document.getElementById(loadedDeck)
-//   console.log(storedDeck)
-//   for (let i=0;i<storedDeck.length;i++){
-//     const li = document.createElement('li')
-//     li.textContent = storedDeck[i]
-//     parentElement.appendChild(li)
-//   }
-
-//   function updateCard(archEnemyDeck){
-// console.log('updateCard')
-//     //rendering the card from the array
-//          const result = document.getElementById('')
-//          return
-//   }
-// updateCard()
-
-
-
-// }
-// function beginGame() {
-
-  
-//   // Load the decks from local storage.
-//   document.getElementById('loadDeckFromLocalStorage').addEventListener('click', loadDecksFromLocalStorage);
-
-//   function loadDecksFromLocalStorage() {
-//     const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
-//     return storedDeck;
-//   }
-
-//   // Retrieve decks from local storage
-//   const loadedDeckId = 'loadedDeck'; // Assuming 'loadedDeck' is the ID you want to target
-//   const storedDeck = loadDecksFromLocalStorage();
-//   const parentElement = document.getElementById(loadedDeckId);
-
-//   if (parentElement && storedDeck) {
-//     for (let i = 0; i < storedDeck.length; i++) {
-//       const li = document.createElement('li');
-//       const img = document.createElement('img')
-//       img.src= storedDeck[i].imageUrl
-//       li.appendChild(img)
-//       parentElement.appendChild(li);
-//     }
-//   }
-
-//   function updateCard(archEnemyDeck) {
-//     console.log('updateCard');
-//     // rendering the card from the array
-//     const result = document.getElementById('');
-//     return result;
-//   }
-//   updateCard();
-// }
-
-
 
 // //Function for saving deck to local storage in-case anything happens to it or you accidentally leave the game. 
 //Im able to save decks, at least one.
@@ -310,21 +216,19 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
 function saveDeck(){
   localStorage.setItem('savedDecks', JSON.stringify(archEnemyDeck))
-  console.log('saved your deck')
+  console.log('saved your deck');
+  statusOfDeck.textContent = `Deck was saved to local storage`
 }
+
 
 
 document.getElementById('clearDeck').addEventListener('click', clearDeck)
 function clearDeck(){
   localStorage.removeItem('savedDecks', JSON.stringify(archEnemyDeck))
+  statusOfDeck.textContent = 'Deck was reset'
 }
 
-// document.getElementById('stageArena').addEventListener('click', stageArena)
-// function stageArena(){
-//   localStorage.removeItem('savedDecks', JSON.stringify(archEnemyDeck))
 
-// window.location.href='ArchenemyArena.html'
-// }
 
 
 

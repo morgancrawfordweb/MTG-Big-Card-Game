@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Archenemy Build</title>
+    <script src="https://kit.fontawesome.com/dd54627537.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
@@ -29,7 +35,7 @@
         <a href="index.html">Home</a>
       </li>
       <li>
-        <a href="PlanesChase.html">PlanesChase</a>
+        <a href="PlanesChase.html">Planechase</a>
       </li>
       <li>
         <a href="Rules.html">Rules</a>
@@ -38,58 +44,72 @@
   </nav>
 
     <h1>Archenemy Deck Builder</h1>
-    <span>A 4-Player Pod Alternative</span>
 
-    <div>
-      <h2>How to play and rules</h2>
-      <p>In Archenemy the game is played like a magic game, except with a twist. Typicall
-    </div>
-
-    <button id='schemes' input="click">Fetch the list of schemes</button>
-    <button id="shuffle" input="click">Shuffle deck</button>
-
-
-
-
-    <div>
-        <section>
-            <h3>Here are your possible schemes!!</h3>
-            <ol id="listOfSchemes">
-            </ol>
+    <section class = 'rules'>
+      <span>A 4-Player Pod Alternative</span>
+      <h2>Rules</h2>
+        <ul>
+          <li>Team turns are shared.</li>
+          <li>Teams consist of one player(Archenemy) vs any number of players. Typically 1v3 or 2v5.</li>
+          <li>Scheme deck must be at least 20 cards. You can't have more than 2 of the same card.</li>
+          <li>Archenemy's life is 40 and other life is 20. For commander it should be 70/40.</li>
+          <li>Archenemy goes first.</li>
+          <li>You "Set a scheme in motion" immediately after the archenemy's precombat main phase.</li>
+        </ul>
+        <span>Full rule set can be found <a href="https://mtg.fandom.com/wiki/Archenemy_(format)">here</a>
         </section>
-    </div>
+    <section class="buttons">
+      <button id='schemes' class='button' input="click">Fetch the list of schemes</button>
+      <button id="shuffle" class='button' input="click">Shuffle deck</button>
+    </section>
+
+    <h3>Here are your possible schemes!!</h3>
+    <section>
+      <ol id="listOfSchemes">
+      </ol>
+    </section>
 
       <!--! This space will be my deck building area. The Undo Button will be able to cut the last card added to the deck -->
-      <div class="holder">
+      <section class="holder">
         <h3>Your deck will be built here!</h3>
+        <h3 id="cardCounter"></h3>
           <div id="potentialDeck">
             <ol id="archEnemyDraftPicks"></ol>
           </div>
           <br></br>
           <div id="playArea">
            <ol id="loadedDeck"></ol>
-            <p>THIS IS WHERE THE PLAY AREA IS</p>
             <br></br>
           </div>
-          <div>
-            <button id="undo">Undo</button>
-            <button id="clearDeck">Reset</button>
-            <button id="submitForLocalStorage">Save Deck</button>
-            <button id="loadDeckFromLocalStorage">Load Deck</button>
-            <a href="ArchEnemyArena.html">Move to game arena</a>
-          </div>
+          <section class="utilityButtons">
+            <button id="undo" class="button">Undo</button>
+            <button id="clearDeck"class="button">Reset</button>
+            <button id="submitForLocalStorage" class="button">Save Deck</button>
+            <span id="status"></span>
+          </section>
+          <a href="ArchEnemyArena.html">Move to game arena</a>
           
-      </div>
+        </section>
+        <footer>
+          <nav>
+            <ul>
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="Planechase.html">Planechase</a>
+              </li>
+              <li>
+                <a href="Rules.html">Rules</a>
+              </li>
+            </ul>
+            <!-- <ul class="socials">
+              <li></li>
+            </ul> -->
+          </nav>
+          
 
-
-
-      <button class='hidden' id="beginGame">Begin Game</button>
-      <section>
-    <section class='hidden' id="archEnemyPlayArea">
-    </section>
-    <button class='hidden' id="previousScheme"><</button>
-    <button class='hidden' id="nextScheme">></button>
-      </section>
+        </footer>
       
 <!-- For CSS for my playable area, I would like the entire plane to envelop the screen with 2 arrows hovering to go forward and backward in the deck, when an ongoing scheme hits, make it hover on the top left or right of the screen or maybe have text that says "ongoing scheme" on top that when you click on it it goes to that scheme. -->
     

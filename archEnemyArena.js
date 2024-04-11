@@ -37,13 +37,14 @@ function beginGame() {
     }
   
     // Retrieve decks from local storage
-    const loadedDeckId = 'loadedDeck'; // Assuming 'loadedDeck' is the ID you want to target
+    const loadedDeckId = 'loadedDeck'; 
     const parentElement = document.getElementById(loadedDeckId);
     const cardNumber = document.getElementById('cardNum');
+    const onGoingScheme = 'onGoingSchemes'
+    const onGoingSchemeArea = document.getElementById(onGoingScheme)
     
 
     let currentSchemeIndex = 0
-    let onGoingSchemeArea=null;
     
 
 
@@ -58,17 +59,23 @@ function beginGame() {
             li.appendChild(img);
 
             if(card.type == 'Ongoing Scheme'){
-              if(onGoingSchemeArea){
-                onGoingSchemeArea.remove()
+              const ongoingSchemes = onGoingSchemeArea.querySelector('li')
+
+              if(ongoingSchemes){
+                ongoingSchemes.remove()
               }
+              onGoingSchemeArea.appendChild(li)
+              
               
   
-              onGoingSchemeArea = document.createElement('div');
-              onGoingSchemeArea.classList.add('onGoingSchemeArea');
-              onGoingSchemeArea.dataset.cardIndex = currentSchemeIndex; // Store card index for deletion
-              onGoingSchemeArea.appendChild(li);
-              onGoingSchemeArea.addEventListener('click', removeOngoingScheme); // Add click event listener for deletion
-            document.body.appendChild(onGoingSchemeArea);
+            //   onGoingSchemeArea = document.createElement('div');
+            //   onGoingSchemeArea.classList.add('onGoingSchemeArea');
+            //   onGoingSchemeArea.dataset.cardIndex = currentSchemeIndex;
+
+            //   onGoingSchemeArea.innerHTML='';
+            //   onGoingSchemeArea.appendChild(li);
+            //   onGoingSchemeArea.addEventListener('click', removeOngoingScheme); // Add click event listener for deletion
+            // document.body.appendChild(onGoingSchemeArea);
             console.log(`Ongoing Scheme ${currentSchemeIndex}`)
 
 
@@ -86,11 +93,10 @@ function beginGame() {
     document.getElementById('removeOnGoingScheme').addEventListener('click', removeOngoingScheme)
     // Function to remove an ongoing scheme
 function removeOngoingScheme() {
-  if(onGoingSchemeArea){
+  const ongoingSchemes = onGoingSchemeArea.querySelectorAll('li')
+  if(ongoingSchemes.length>0){
     //remove the current card in the dom if it is there
-    onGoingSchemeArea.remove();
-    //reset it to null
-    onGoingSchemeArea=null;
+    ongoingSchemes[ongoingSchemes.length-1].remove()
   }
 }
 
@@ -99,10 +105,10 @@ function removeOngoingScheme() {
     function incrementScheme(){
         currentSchemeIndex++
         if(currentSchemeIndex>=shuffledDeck.length){
-            currentSchemeIndex = shuffledDeck.length -1
-        }
+            reshuffle()
+        }else{
     drawCurrentScheme();
-    }
+    }}
 
     function decrementScheme(){
         currentSchemeIndex--;
@@ -117,6 +123,15 @@ function removeOngoingScheme() {
     document.getElementById('incrementScheme').addEventListener('click',incrementScheme)
     document.getElementById('decrementScheme').addEventListener('click',decrementScheme)
 
-    drawCurrentScheme()
+    drawCurrentScheme();
+
+function reshuffle(){
+
+  currentSchemeIndex = 0
+  beginGame()
+
+}
+
   }
+
   
