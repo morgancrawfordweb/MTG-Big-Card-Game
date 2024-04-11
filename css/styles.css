@@ -192,6 +192,7 @@ h3{
 .buttons,.utilityButtons{
   display: flex;
   justify-content: center;
+  margin: 0% 5%;
 }
 
 
@@ -199,6 +200,8 @@ h3{
   background-color: orange;
   font-size: 1.2rem;
   color: black;
+  padding: 2%;
+  margin: 2%;
 }
 .holder a{
   font-size: 1.5rem;
@@ -216,3 +219,11 @@ h3{
   justify-content: center;
 }
 
+.schemeArea h2{
+  display: inline-flex;
+  justify-content: center;
+}
+
+li img{
+  width: 90%;
+}

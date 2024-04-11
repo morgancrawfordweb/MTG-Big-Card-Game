@@ -23,6 +23,7 @@ document.getElementById('beginGame').addEventListener ('click', beginGame)
 
 
 function beginGame() {
+
     
 
     const storedDeck = loadDecksFromLocalStorage();
@@ -46,9 +47,6 @@ function beginGame() {
 
     let currentSchemeIndex = 0
     
-
-
-  
     // Function to draw the current card
     function drawCurrentScheme() {
         if (shuffledDeck && currentSchemeIndex >= 0 && currentSchemeIndex < shuffledDeck.length) {
@@ -65,27 +63,12 @@ function beginGame() {
                 ongoingSchemes.remove()
               }
               onGoingSchemeArea.appendChild(li)
-              
-              
-  
-            //   onGoingSchemeArea = document.createElement('div');
-            //   onGoingSchemeArea.classList.add('onGoingSchemeArea');
-            //   onGoingSchemeArea.dataset.cardIndex = currentSchemeIndex;
-
-            //   onGoingSchemeArea.innerHTML='';
-            //   onGoingSchemeArea.appendChild(li);
-            //   onGoingSchemeArea.addEventListener('click', removeOngoingScheme); // Add click event listener for deletion
-            // document.body.appendChild(onGoingSchemeArea);
             console.log(`Ongoing Scheme ${currentSchemeIndex}`)
-
-
             }else{
               console.log(`Scheme ${currentSchemeIndex}`)
               parentElement.innerHTML = '';
-              parentElement.appendChild(li)
-              
+              parentElement.appendChild(li) 
             }
-
             cardNumber.textContent=`Card ${currentSchemeIndex+1} out of ${shuffledDeck.length}`
 
         }
@@ -126,12 +109,11 @@ function removeOngoingScheme() {
     drawCurrentScheme();
 
 function reshuffle(){
-
-  currentSchemeIndex = 0
-  beginGame()
-
-}
+  currentSchemeIndex=0
+  shuffleDeck(storedDeck); // Re-shuffle the deck
+  drawCurrentScheme();
 
   }
+}
 
   
