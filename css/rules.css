@@ -109,7 +109,6 @@ img{
     color: rgb(250, 113, 1);
   }
 
-
   /* Navbar styles */
 .navbar {
     display: flex;
@@ -135,47 +134,11 @@ img{
   text-decoration: none;
 }
 
-/* Hamburger styles */
-.menu-toggle {
-  cursor: pointer;
-  padding: 10px;
-}
-
-.hamburger {
-  background-color: #fff;
-  height: 2px;
-  width: 20px;
-  transition: all 0.3s ease;
-}
-
-.hamburger:before,
-.hamburger:after {
-  background-color: #fff;
-  content: '';
-  display: block;
-  height: 2px;
-  margin-bottom: 4px;
-  transition: all 0.3s ease;
-}
-
-/* Transform the hamburger icon into a close icon
-.open .hamburger {
-  transform: rotate(45deg);
-}
-
-.open .hamburger:before {
-  transform: rotate(-45deg) translate(-5px, -6px);
-}
-
-.open .hamburger:after {
-  opacity: 0;
-} */
 .title{
     display: flex;
     justify-content: center;
     text-decoration: underline;
 }
-
 
 .rules-plane{
   margin: 0 30%;

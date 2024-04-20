@@ -1,19 +1,3 @@
-//This will double as the planeschase portion and archenemy portion.
-
-// const { arch } = require("os");
-
-//Archenemy game works as 1v3.
-//Archenemy deck consists of shemes. Each scheme does something else, and you can have AT LEAST 20 Scheme Cards && you cant have more than 2 of the same cards.
-//* What we know is that their are two rules. 
-//?Rule 1: The array length must be at least 20, or greater than 19.
-
-
-//*How i picture the application to work.
-//* (1)Their will be a grid on the main page. The grid will show up in rows of 2 or 3, whatever fits better on mobile. (2)The the user can scroll down to whichever ones the want to click and it will be treated like google images where you can pick multiple before submitting. (3) After submitting, this will create the deck, and that way you and go forward through the deck and "draw" cards. (4)After the scheme deck is finished, we can make the option to pick new cards, or shuffle your scheme deck. If you shuffle the game still continues. 
-
-//TODO 3: Their will be two buttons. one to move forward more into the array, the other to the previous. So i will probably need a loop, and then have to have the index go back and forth with each button press.
-
-//TODO 4: Array shuffle will save that array, and do an actual shuffle. 
 
 //*This is the full deck of cards from the api itself
 const schemeDeck = [];
@@ -114,7 +98,6 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
     const index = archEnemyDeck.findIndex(c => c.id === card.id);
     if (index !== -1) {
       archEnemyDeck.splice(index, 1);
-      console.log('worked')
       renderArchEnemyDeck();
     }
   }

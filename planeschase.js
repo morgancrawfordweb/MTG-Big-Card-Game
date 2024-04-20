@@ -1,8 +1,13 @@
-//*Planeschase is an alternate game mode, that is a free-for-all mtg game, usually played with 4+ people.
+// Event listener for player select dropdown
+document.getElementById('player-select').addEventListener('click', changePlayer)
 
-//* This game is very fun, and this will be modified. In which, the top 4 other planes in the deck, you will be able to go to each one individually. This rewards the roller.
+let selectedPlayers = 1; // Initialize selectedPlayers variable
 
-const sortedPlanesDeck=[]
+function changePlayer() {
+  // Get the selected number of players
+  selectedPlayers = parseInt(this.value);
+  console.log(selectedPlayers)
+};
 
 
 // Adding event listener to the 'planes' element
@@ -10,9 +15,7 @@ document.getElementById('planes').addEventListener('click', getPlanes);
 
 // Function to fetch planechase cards from the API
 function getPlanes() {
-  var planechaseDeck = [];
-  const phenomenonDeck = [];
-
+  console.log('ran getPlanes')
   // Function to fetch cards from a specific page
   function fetchPlanesByPage(page) {
     const planechaseCatalog = `https://api.magicthegathering.io/v1/cards?layout=planar&page=${page}`;
@@ -20,6 +23,8 @@ function getPlanes() {
       .then(res => res.json())
       .then(data => data.cards);
   }
+
+  let playableDeck;
 
   // Function to fetch all cards from all pages
   function fetchAllPlanes() {
@@ -29,174 +34,172 @@ function getPlanes() {
       fetchPromises.push(fetchPlanesByPage(page));
     }
     // Resolving all fetch promises
+    // This block creates a separate deck of phenomenons and planes. The cards are filtered by name and separated by the card type. They are separated because they have different rule sets for picking and choosing cards.
     return Promise.all(fetchPromises)
       .then(results => {
+        const planechaseDeck = [];
+        const phenomenonDeck = [];
         results.forEach(cards => {
           cards.forEach(card => {
-            if (card.imageUrl && !planechaseDeck.some(c => c.name === card.name && !c.imageUrl)) {
+            if (card.imageUrl && card.type === 'Phenomenon' && !phenomenonDeck.some(c => c.name === card.name && !c.imageUrl)) {
+              phenomenonDeck.push(card);
+            } else if (card.imageUrl && card.type !== 'Phenomenon' && !planechaseDeck.some(c => c.name === card.name && !c.imageUrl)) {
               planechaseDeck.push(card);
             }
           });
         });
-        return planechaseDeck;
+        console.log('ran fetchAllPlanes')
+        return { phenomenonDeck, planechaseDeck };
       });
   }
 
-  //button to fetch all of the cards and put them inside of my planeschase array
-  fetchAllPlanes()
-    .then(deck => {
 
-      const sortedPlanesDeck = {}
-      
-      // This functions filters out the planar deck by only adding decks with a unique name. Functoin checks to see if the name already exists, if it does then it gets returned, otherwise it stays.
-      const filteredDeck = deck.filter((deck)=>{
-        const name = deck.name
-        if(!sortedPlanesDeck[name]){
-          sortedPlanesDeck[name] = true;
-          return true
+  // Button to fetch all of the cards and put them inside of my planeschase array
+  fetchAllPlanes().then(decks => {
+    const { phenomenonDeck, planechaseDeck } = decks;
+
+    // This function filters out the planar deck by only adding decks with a unique name. Function checks to see if the name already exists, if it does then it gets returned, otherwise it stays.
+
+    // The filter removes duplicate cards from the planechase deck
+    const filteredPhenomenonDeck = filteredDeck(phenomenonDeck);
+
+    const filteredPlanechaseDeck = filteredDeck(planechaseDeck);
+    // shuffles each deck so that the sliced deck is randomized
+    shuffleDeck(filteredPhenomenonDeck)
+    shuffleDeck(filteredPlanechaseDeck)
+    const playerSelect = document.getElementById('player-select')
+    // gets the value of players from the user
+    const selectedPlayers = parseInt(playerSelect.value);
+
+
+    // This is the math behind the number of cards picked
+    const maxPlanechaseCards = selectedPlayers * 10;
+    const maxPhenomenonCards = selectedPlayers * 2;
+    // filtered decks are randomized and then sliced off the top of the array
+    const playablePlanechaseDeck = filteredPlanechaseDeck.slice(0, maxPlanechaseCards);
+    const playablePhenomenonDeck = filteredPhenomenonDeck.slice(0, maxPhenomenonCards);
+
+    // Combine both decks to create the playable deck
+
+    playableDeck = playablePhenomenonDeck.concat(playablePlanechaseDeck)
+    // Shuffles the concated deck together to finally create the playable deck!
+    shuffleDeck(playableDeck)
+    console.log(playableDeck)
+    renderPlanes(playableDeck)
+    attachClickListeners(playableDeck)
+    return playableDeck
+  });
+}
+
+// Function to render or process filtered decks
+
+//*I need that function to replace the current plane with the one clicked
+//*I need to give each plane a click event that will take them to the next 4 planes. 
+
+// This section grabs the number of players from the dom.
+
+// Here we will attach click listeners to the cards. I need to set up a flag on each card so that if it is clicked it is set to true. If it is true, move it to the current plane, otherwise leave the 4 on the top row to pick and choose which plane you want to go to.
+
+function renderPlanes(deck) {
+  const currentPlaneElement = document.getElementById('currentPlane');
+  const topRowElement = document.getElementById('potentialPlanes');
+  currentPlaneElement.innerHTML = ''; // Clear current plane
+  topRowElement.innerHTML = ''; // Clear top row
+
+  // Render current plane
+  const currentPlaneImg = document.createElement('img');
+  currentPlaneImg.src = deck[currentIndex].imageUrl;
+  currentPlaneImg.dataset.id = deck[currentIndex].id;
+  currentPlaneImg.className = 'cardImage currentPlane';
+  currentPlaneElement.appendChild(currentPlaneImg);
+
+  // Render top row with next 4 potential planes
+  for (let i = currentIndex + 1; i <= currentIndex + 4; i++) {
+    if (i < deck.length) {
+      const li = document.createElement('li');
+      const img = document.createElement('img');
+      img.src = deck[i].imageUrl;
+      img.dataset.id = deck[i].id;
+      img.className = 'cardImage potentialPlane';
+      li.appendChild(img);
+      topRowElement.appendChild(li);
+    }
+  }
+  attachClickListeners(deck)
+}
+
+let currentIndex = 0; // Initialize currentIndex variable
+
+function attachClickListeners(deck) {
+  // Attach click listeners to the cards in the top row
+  document.querySelectorAll('.potentialPlane').forEach(item => {
+    item.addEventListener('click', function () {
+      const cardId = item.dataset.id;
+      console.log(deck.name)
+      // Find the index of the clicked card in the deck
+      const index = deck.findIndex(card => card.id === cardId);
+      if (index !== -1) {
+        // Update currentIndex to the next card after the clicked one
+        currentIndex = index;
+        // Re-render planes
+        if(deck[index].type=="Phenomenon"){
+          const phenomenonRandomizer = document.getElementById('phenomenonRandomizer')
+          let randomPlane = Math.floor(Math.random()*4);
+          phenomenonRandomizer.textContent = `You chose a Phenomenon, please travel to plane ${randomPlane}`
         }
-        return false;
-      })
-//filtered deck gives me the entire array of objects that i need. They are sorted to remove any dupliate named planes
-console.log(filteredDeck)
-    
-document.getElementById('shuffle').addEventListener('click', shuffleDeck)
-      
-      function shuffleDeck(){
-        var randomizePlanarDeck=function(array){
-          var m=array.length,t,i;
         
-          while(m){
-            //this picks the remaining element
-            i=Math.floor(Math.random()*m--);
+        renderPlanes(deck);
         
-            //this swaps that with the current element
-            t=array[m];
-            array[m]=array[i];
-            array[i]=t;
-          }
-          return array;
-          
-        }
-        // randomizePlanarDeck(sortedType)
-        renderPlanesChaseDeck(sortedPlanesDeck);
-        
-
-        //?I think i need to render the cards right after they have been loaded up
-        //? I need to figure out a way to do all of this at one time.
-
-
-        function renderPlanesChaseDeck() {
-          const parentElement = document.getElementById("listOfPlanes");
-          parentElement.innerHTML = '';
-          sortedType.forEach(card => {
-            const pickedCount = countCardInDeck(card);
-            if (pickedCount <= maxCardCount) {
-              const li = document.createElement('li');
-              const img = document.createElement('img');
-              img.src = card.imageUrl;
-              img.className = 'cardImage';
-              img.dataset.id = card.id;
-              li.appendChild(img);
-              parentElement.appendChild(li);
-            }
-          });
-        }
-        randomizePlanarDeck(sortedType)
-        renderArchEnemyDeck(sortedType)
-        
-        }
-        
-        //*shuffle function works!
-        const sortedType =  filteredDeck.sort((a,b)=> a.type-b.type);
-      shuffleDeck(sortedType)
-      
-
-      })
-    .catch(err => {
-      console.log(`error ${err}`);
+      }
     });
+  });
 }
 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
-//!Code that needs to be reviewed 
+document.getElementById('rollPlanarDice').addEventListener('click', rollPlanarDice)
+function rollPlanarDice(){
 
 
-//I want to convert this function to render my planes. I want the ability to put planes 
+  let result = Math.floor(Math.random()*6)+1;
+  console.log(result)
+  let readNum = document.getElementById('planarDieResult')
+  if(result==6){
+    readNum.textContent = `{You rolled a ${result}, Chaos!}`
+  }else if(result==1){
+    readNum.textContent = `{You rolled a ${result}, Planeswalk}`
+  }else{
+    readNum.textContent = `{You rolled a ${result}, Spend more Mana!}`
 
+  }
 
-//   -2
-// 1 -3
-//   -4 
-//   -5
-
-//1 is the current plant, 2,3,4,5 will be planes that you are able to pick from.
-//Whenever you click on the plane, the plane gets moved to the first one, and then the loop increments up 5 4 and then continue to increment up 4. We dont need 5 planes because we just need to render the first 5 in the beginning.
-
-//!Need to convert the Archenemy stuff to Planeschase Stuff
-function countCardInDeck(card) {
-  const count = sortedType.reduce((total, currentCard) => {
-    return currentCard.id === card.id ? total + 1 : total;
-  }, 0);
-  return count;
 }
 
-function addCardToDeck(card) {
-  archEnemyDeck.push(card);
+// Add event listener to the shuffle button
+document.getElementById('shuffle').addEventListener('click', shuffleDeck);
 
-  //console log works and shows the array of cards inside of this.
-  console.log(archEnemyDeck)
-  renderArchEnemyDeck();
+// Fischer-Yates algorithm to shuffle the current array of cards
+function shuffleDeck(deck) {
+  var m = deck.length, t, i;
+  while (m) {
+    // this picks the remaining element
+    i = Math.floor(Math.random() * m--);
+
+    // this swaps that with the current element
+    t = deck[m];
+    deck[m] = deck[i];
+    deck[i] = t;
+  }
+  return deck;
 }
 
-//TODO -A shared planar deck also cannot contain more phenomenon cards than 2 times the number of players in the game. 
-//?---------------------//?
-//TODO -Individual planar decks should contain at least 10 cards, including no more than 2 phenomenon cards.
-//?---------------------//?
-//TODO: Change all of this to reflect the planes instead of schemes.
-
-
-//! Change archenemy deck to filtered deck 11/2/23
-//This gives me the ability to remove a card and not go over 2 of that card. 
-// function twoCardLimit(card) {
-//   const index = archEnemyDeck.findIndex(c => c.id === card.id);
-//   if (index !== -1) {
-//     archEnemyDeck.splice(index, 1);
-//     console.log('worked')
-//     renderArchEnemyDeck();
-//   }
-// }
-
-
-// function renderArchEnemyDeck() {
-//   const parentElement = document.getElementById("listOfPlanes");
-//   parentElement.innerHTML = '';
-//   archEnemyDeck.forEach(card => {
-//     const pickedCount = countCardInDeck(card);
-//     if (pickedCount <= maxCardCount) {
-//       const li = document.createElement('li');
-//       const img = document.createElement('img');
-//       img.src = card.imageUrl;
-//       img.className = 'cardImage';
-//       img.dataset.id = card.id;
-//       li.appendChild(img);
-//       parentElement.appendChild(li);
-//     }
-//   });
-// }
-
-
-function undo() {
-  archEnemyDeck.pop();
-  renderArchEnemyDeck();
-  console.log(archEnemyDeck);
+// Function to filter the deck by unique names. Cards get filtered and if they already exist to remove them based on their name
+function filteredDeck(deck) {
+  const sortedDeck = {};
+  return deck.filter(card => {
+    const name = card.name;
+    if (!sortedDeck[name]) {
+      sortedDeck[name] = true;
+      return true;
+    }
+    return false;
+  });
 }
-
-// document.getElementById('undo').addEventListener('click', undo);

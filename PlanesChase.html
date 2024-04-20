@@ -42,38 +42,50 @@
       </li>
     </ul>
   </nav>
-    <h1>This will be for PlanesChase!</h1>
-    <button id="planes">Ready to Play?</button>
-    <button id="shuffle">Shuffle Deck</button>
+  <section class="rules">
+    <h1>Planechase</h1>
+    <p>Select the number of players you are playing with. This application will automatically do 10x the number of planes and 2x the number of phenomenon based on the players you have. When you choose a phenomenon, use the RNG on the bottom to pick the next random plane you will travel to.</p>
+  </section>
+  <section class="gameMenu buttons"><span>Number of Players:</span>
+    <select id="player-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <button class='button' id="planes">Ready to Play?</button>
+    <button class='button' id="shuffle">Shuffle Deck</button>
+  </section>
+
+  <div class="container">
+    <section class="currentPlane">
+      <h3>Current Plane</h3>
+      <ul  id="currentPlane">
+      </ul>
+      <section id="diceSection">
+        <h4>Dice Section</h4>
+        <p id="phenomenonRandomizer"></p>
+        <button class='button' id="rollPlanarDice">Roll Planar Die</button>
+        <p id="planarDieResult"></p>
+      </section>
+    </section>
+
+    <section class="potentialPlanesSection">
+    <h3>Potential Planes</h3>
+    <section class="topRow">
+      <ul id="potentialPlanes">
+      </ul>
+    </section>
+    </section>
+  </div>
     
 
-    <div>
-      <section>
-          <h3>Here are your possible planar cards!</h3>
-          <ol id="listOfPlanes">
-          </ol>
-      </section>
-  </div>
-
-  <section id="planeschaseExample">
-    <section class="top2">
-      <ul>
-      </ul>
-    </section>
-    <section class="currentPlane">
-    <section class="bottom2">
-      <ul>
-      </ul>
-    </section>
-</section>
-<section id="diceSection">
-  <section id="planarDice">
-
-  </section>
-  <section>
-    <p>0</p>
-  </section>
-</section>
     
 </body>
 <script src ="planeschase.js"> </script>
