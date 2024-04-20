@@ -36,6 +36,7 @@
   }
   
   footer {
+    margin-top: 5%;
   
   }
   
@@ -56,19 +57,20 @@
   /*Need To change this for mobile screens mostly*/
   ol{
     display: inline-flex;
-    width: 95%;
+    width: 100%;
     overflow: auto;
   }
 
   li{
     list-style-type: disc;
-    padding: 15px;
+    padding: 5px;
   }
 
 ol *{
   list-style-type: none;
+  max-width: 250px;
+  padding: 3px;
 }
-
   .top2{
     display: flex;
     width: 100%;
@@ -124,41 +126,6 @@ nav ul li{
   text-decoration: none;
 }
 
-/* Hamburger styles */
-.menu-toggle {
-  cursor: pointer;
-  padding: 10px;
-}
-
-.hamburger {
-  background-color: #fff;
-  height: 2px;
-  width: 20px;
-  transition: all 0.3s ease;
-}
-
-.hamburger:before,
-.hamburger:after {
-  background-color: #fff;
-  content: '';
-  display: block;
-  height: 2px;
-  margin-bottom: 4px;
-  transition: all 0.3s ease;
-}
-
-/* Transform the hamburger icon into a close icon */
-.open .hamburger {
-  transform: rotate(45deg);
-}
-
-.open .hamburger:before {
-  transform: rotate(-45deg) translate(-5px, -6px);
-}
-
-.open .hamburger:after {
-  opacity: 0;
-}
 .hidden{
   display: none;
 }
@@ -181,6 +148,7 @@ h3{
   display: grid;
   justify-content: center;
   margin: 2% 5%;
+  justify-items: center;
 }
 
 .rules h2{
@@ -193,10 +161,9 @@ h3{
 .buttons,.utilityButtons{
   display: flex;
   justify-content: center;
-  margin: 0% 5%;
+  margin: 0% 3%;
   align-items: center;
 }
-
 
 .button{
   background-color: orange;
@@ -213,6 +180,12 @@ h3{
 }
 
 /* CSS for scheme and ongoing scheme area */
+.schemes{
+    display: flex;
+    justify-content: center;
+    margin: 0% 3%;
+    align-items: center;
+}
 .schemeArea{
   display: inline-flex;
   flex-direction: column;
@@ -225,6 +198,30 @@ h3{
 .schemeArea h2{
   display: inline-flex;
   justify-content: center;
+}
+
+#onGoingSchemes:hover img{
+  transform: scale(1.6);
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+
+#loadedDeck:hover img{
+  transform: scale(1.6);
+  z-index: 1;
+  transition: transform 0.5s ease;
+}
+
+#loadedDeck, #onGoingSchemes{
+  padding: 0%;
+  overflow: visible;
+}
+
+.schemeHeader{
+  display: flex;
+    justify-content: center;
+    margin: 0% 3%;
+    align-items: center;
 }
 
 /* li img{

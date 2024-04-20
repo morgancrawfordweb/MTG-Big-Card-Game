@@ -170,7 +170,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 
    
    //*randomize array right here
-   document.getElementById("shuffle").addEventListener ('click', shuffleDeck)
+  //  document.getElementById("shuffle").addEventListener ('click', shuffleDeck)
    //!This function works shuffling the scheme deck array. This is the base. All i need to do now is to set up a playerDeck for the cards the user wants, and then put that array through this function.
    function shuffleDeck(){
    var randomizeArray=function(array){

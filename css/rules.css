@@ -80,7 +80,7 @@
  
 img{
   transform: rotate(90deg);
-  width: 15%;
+  width: 35%;
 }
 #current{
   width: 30%;
@@ -153,4 +153,13 @@ img{
   transform: rotate(0deg);
   display: grid;
   justify-content: space-evenly;
+}
+.schemeExamples img{
+transform: rotate(0deg);
+}
+.schemeExamples {
+  margin: 3% 0%;
+  display: inline-flex;
+  justify-content: space-evenly; 
+
 }

@@ -60,7 +60,7 @@
         </section>
     <section class="buttons">
       <button id='schemes' class='button' input="click">Fetch the list of schemes</button>
-      <button id="shuffle" class='button' input="click">Shuffle deck</button>
+      <!-- <button id="shuffle" class='button' input="click">Shuffle deck</button> -->
     </section>
 
     <h3>Here are your possible schemes!!</h3>
@@ -71,22 +71,18 @@
 
       <!--! This space will be my deck building area. The Undo Button will be able to cut the last card added to the deck -->
       <section class="holder">
+        <section class="utilityButtons">
+          <button id="undo" class="button">Undo</button>
+          <button id="clearDeck"class="button">Reset</button>
+          <button id="submitForLocalStorage" class="button">Save Deck</button>
+          <span id="status"></span>
+        </section>
         <h3>Your deck will be built here!</h3>
         <h3 id="cardCounter"></h3>
           <div id="potentialDeck">
             <ol id="archEnemyDraftPicks"></ol>
           </div>
-          <br></br>
-          <div id="playArea">
-           <ol id="loadedDeck"></ol>
-            <br></br>
-          </div>
-          <section class="utilityButtons">
-            <button id="undo" class="button">Undo</button>
-            <button id="clearDeck"class="button">Reset</button>
-            <button id="submitForLocalStorage" class="button">Save Deck</button>
-            <span id="status"></span>
-          </section>
+          
           <a href="ArchEnemyArena.html">Move to game arena</a>
           
         </section>
