@@ -48,6 +48,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
       const listOfSchemes = document.getElementById("listOfSchemes");
       const li = document.createElement('li');
       const img = document.createElement('img');
+      
   
       img.dataset.id = schemeDeck[i].id;
       img.src = schemeDeck[i].imageUrl;
@@ -64,6 +65,14 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
       item.addEventListener('click', function() {
         const cardId = item.dataset.id;
         const selectedCard = schemeDeck.find(card => card.id === cardId);
+
+        // 🔥 Trigger GSAP animation for THIS card only item=card.
+        // Need to move the card from the list of schemes to the archEnemyDraftPicks
+        let builtDeck = document.querySelector("#archEnemyDraftPicks")
+        gsap.to(".cardImage",{y:builtDeck, yoyo: true, duration: 1})
+      
+
+
         if (selectedCard) {
           const pickedCount = countCardInDeck(selectedCard);
           if (pickedCount < maxCardCount) {
@@ -123,7 +132,7 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
     });
   }
   
-
+//*Removes the last deck placed inside of the arch enemy deck
   function undo() {
     archEnemyDeck.pop();
     renderArchEnemyDeck();
@@ -197,23 +206,29 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
 //Im able to save decks, at least one.
 //* I need a way to grab from a list of saved decks. Maybe have an input form so that someone can name them.
 document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
+const deckElement = document.getElementById('deckName')
+
+
 function saveDeck(){
-  localStorage.setItem('savedDecks', JSON.stringify(archEnemyDeck))
+  localStorage.setItem(deckElement.value, JSON.stringify(archEnemyDeck))
   console.log('saved your deck');
+  console.log(deckElement)
   statusOfDeck.textContent = `Deck was saved to local storage`
 }
 
 
 
+//! Make this button work with the drop down menu. Be able to pick and remove the deck
 document.getElementById('clearDeck').addEventListener('click', clearDeck)
-function clearDeck(){
-  localStorage.removeItem('savedDecks', JSON.stringify(archEnemyDeck))
+function clearDeck(savedDeck){
+  localStorage.removeItem(`${savedDeck}`)
+  console.log(savedDeck)
   statusOfDeck.textContent = 'Deck was reset'
 }
 
 
 
-
+//!Retrieving the local storage deck, and then pushing it to the actual arena. May need to double check. 
 
 
 

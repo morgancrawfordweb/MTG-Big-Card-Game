@@ -59,6 +59,7 @@
     display: inline-flex;
     width: 100%;
     overflow: auto;
+      margin-right: 2rem;
   }
 
   li{
@@ -179,7 +180,7 @@ h3{
   justify-content: center;
 }
 
-/* CSS for scheme and ongoing scheme area */
+/*//! CSS for scheme and ongoing scheme area */
 .schemes{
     display: flex;
     justify-content: center;
@@ -227,8 +228,15 @@ h3{
 /* li img{
   width: 90%;
 } */
+/* !Archenemy mobile layouts */
+#archEnemyDraftPicks img{
+  background-color: rgba(59, 59, 59, 0.633);
 
+}
 
+#potentialDeck{
+margin-right: 2rem;
+}
 /* !Planechase styles */
 
 .potentialPlane{
@@ -250,6 +258,7 @@ h3{
 #potentialPlanes{
   display: inline-grid;
   grid-template-columns: repeat(2, 1fr);
+  background-color: green;
   gap: 3px;
 }
 

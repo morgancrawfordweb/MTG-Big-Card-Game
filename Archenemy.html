@@ -74,9 +74,19 @@
         <section class="utilityButtons">
           <button id="undo" class="button">Undo</button>
           <button id="clearDeck"class="button">Reset</button>
-          <button id="submitForLocalStorage" class="button">Save Deck</button>
-          <span id="status"></span>
-        </section>
+          <form>
+            <label for="deckName">Deck Name:</label>
+            <input type="text" id="deckName" name="deckName">
+              <button id="submitForLocalStorage" class="button">Save Deck</button>
+          </form>
+           <span id="status"></span>
+            </section>
+            <section class="gameMenu buttons"><span>Number of Players:</span>
+        <select id="savedDecks">
+        </select>
+        <button class='button' id="planes">Ready to Play?</button>
+        <button class='button' id="shuffle">Shuffle Deck</button>
+      </section>
         <h3>Your deck will be built here!</h3>
         <h3 id="cardCounter"></h3>
           <div id="potentialDeck">
@@ -119,4 +129,11 @@
     
 </body>
 <script src ="archenemy.js"> </script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MorphSVGPlugin.min.js"></script>
+
+<script src ="animation.js"> </script>
 </html>
