@@ -18,13 +18,62 @@ document.getElementById('beginGame').addEventListener ('click', beginGame)
       }
       return array;
     } 
-    return randomizeArray(storedDeck.slice());
+    // return randomizeArray(storedDeck.slice());
     }
+
+
+// Render out a list of decks that were stored from key/value pairs
+// Target the text value, adn grab the values that match that key. Push them into an array here that is shuffled
+// select<options>
+document.addEventListener("DOMContentLoaded", renderSchemeDeckOptions)
+function renderSchemeDeckOptions(){
+  const targetDeck = document.getElementById('savedDecks')
+
+  // drop down menu
+  const dropDownMenu = document.getElementById('deckChoices')
+
+  const savedDecks = {}
+  dropDownMenu.innerHTML=''
+
+  // Loops through local storage length and finds every key. Gets every key.
+  // Cached Schemed are first, so we will set i=1 instead
+  for(let i=0;i<=localStorage.length-1;i++){
+    const key = localStorage.key(i)
+    const obj = localStorage.getItem(key)  
+    // Creates option for drop down menu
+    const option = document.createElement('option')
+    option.value=key
+    option.textContent=key
+    dropDownMenu.appendChild(option)
+
+    console.log(key)
+    //  savedDecks[key] = localStorage.getItem(key)
+    // console.log(savedDecks)
+    try{
+      const parsedDeck = JSON.parse(obj)
+
+      if(Array.isArray(parsedDeck)){
+        console.log(parsedDeck)//Brings the whole array out
+        parsedDeck.map((scheme,index)=>{
+          // console.log(scheme,index)
+
+
+
+        })
+      }
+    }catch(err){
+      console.log('Their was an err',err)
+      return err
+    }
+  
+
+}}
+
+
 
 
 function beginGame() {
 
-    
 
     const storedDeck = loadDecksFromLocalStorage();
     const shuffledDeck = shuffleDeck(storedDeck)

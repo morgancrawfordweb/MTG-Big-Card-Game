@@ -74,6 +74,7 @@
         <section class="utilityButtons">
           <button id="undo" class="button">Undo</button>
           <button id="clearDeck"class="button">Reset</button>
+          <button id="getSavedDecks" class="button">Test to get Decks hope it works</button>
           <form>
             <label for="deckName">Deck Name:</label>
             <input type="text" id="deckName" name="deckName">
@@ -81,20 +82,20 @@
           </form>
            <span id="status"></span>
             </section>
-            <section class="gameMenu buttons"><span>Number of Players:</span>
-        <select id="savedDecks">
-        </select>
-        <button class='button' id="planes">Ready to Play?</button>
-        <button class='button' id="shuffle">Shuffle Deck</button>
+
+            <!-- use this to pull from Saved Decks local storage -->
+            <section class="gameMenu buttons"><span>Saved Decks:</span>
+                <select id="savedDecks">
+                  <option value=></option>
+                </select>
+        <a class='button' href="ArchEnemyArena.html">Ready to Play?</a>
+        <!-- <button class='button' id="shuffle">Shuffle Deck</button> -->
       </section>
         <h3>Your deck will be built here!</h3>
         <h3 id="cardCounter"></h3>
           <div id="potentialDeck">
             <ol id="archEnemyDraftPicks"></ol>
-          </div>
-          
-          <a href="ArchEnemyArena.html">Move to game arena</a>
-          
+          </div>          
         </section>
         <footer>
           <nav>
