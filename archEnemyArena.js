@@ -1,23 +1,23 @@
-document.getElementById('beginGame').addEventListener ('click', beginGame)
+
 
        //*randomize array right here
 //    document.getElementById("shuffle").addEventListener ('click', shuffleDeck)
    //!This function works shuffling the scheme deck array. This is the base. All i need to do now is to set up a playerDeck for the cards the user wants, and then put that array through this function.
-   function shuffleDeck(storedDeck){
-    var randomizeArray=function(array){
-      var m=array.length,t,i;
+   function shuffleDeck(deck){
+    const newArr = deck.slice()
+      var m=newArr.length,t,i;
     
       while(m){
         //this picks the remaining element
         i=Math.floor(Math.random()*m--);
     
         //this swaps that with the current element
-        t=array[m];
-        array[m]=array[i];
-        array[i]=t;
+        t=newArr[m];
+        newArr[m]=newArr[i];
+        newArr[i]=t;
       }
-      return array;
-    } 
+      return newArr;
+    
     // return randomizeArray(storedDeck.slice());
     }
 
@@ -27,64 +27,49 @@ document.getElementById('beginGame').addEventListener ('click', beginGame)
 // select<options>
 document.addEventListener("DOMContentLoaded", renderSchemeDeckOptions)
 function renderSchemeDeckOptions(){
-  const targetDeck = document.getElementById('savedDecks')
-
   // drop down menu
-  const dropDownMenu = document.getElementById('deckChoices')
-
-  const savedDecks = {}
-  dropDownMenu.innerHTML=''
-
+  const archCreatedDecks = document.getElementById('deckChoices')
+  archCreatedDecks.innerHTML=''
   // Loops through local storage length and finds every key. Gets every key.
   // Cached Schemed are first, so we will set i=1 instead
   for(let i=0;i<=localStorage.length-1;i++){
     const key = localStorage.key(i)
-    const obj = localStorage.getItem(key)  
     // Creates option for drop down menu
     const option = document.createElement('option')
     option.value=key
     option.textContent=key
-    dropDownMenu.appendChild(option)
-
-    console.log(key)
-    //  savedDecks[key] = localStorage.getItem(key)
-    // console.log(savedDecks)
-    try{
-      const parsedDeck = JSON.parse(obj)
-
-      if(Array.isArray(parsedDeck)){
-        console.log(parsedDeck)//Brings the whole array out
-        parsedDeck.map((scheme,index)=>{
-          // console.log(scheme,index)
-
-
-
-        })
-      }
-    }catch(err){
-      console.log('Their was an err',err)
-      return err
+    // Removes the cached schemes that are saved with local data
+    if(key!='cachedSchemes'){
+    archCreatedDecks.appendChild(option)
+    }else{
+      console.log('cachedSchemes are present')
     }
-  
-
 }}
 
 
+// hook button to pick and choose which decks you want to use.
+document.getElementById('beginGame').addEventListener('click', () => {
+  const deckKey = document.getElementById('deckChoices').value
+  if (!deckKey) {
+    console.log("No deck selected")
+    return
+  }
+  const parsedDeck = JSON.parse(localStorage.getItem(deckKey))
+  beginGame(parsedDeck)
+})
 
 
-function beginGame() {
+function beginGame(deck) {
 
+  if(!deck || !Array.isArray(deck)){
+    console.log("This is not a deck")
+    return
+  }
 
-    const storedDeck = loadDecksFromLocalStorage();
-    const shuffledDeck = shuffleDeck(storedDeck)
+    let shuffledDeck = shuffleDeck(deck);
+    let currentSchemeIndex = 0
 
-    // Load the decks from local storage.
-    document.getElementById('loadDeckFromLocalStorage').addEventListener('click', loadDecksFromLocalStorage);
   
-    function loadDecksFromLocalStorage() {
-      const storedDeck = JSON.parse(localStorage.getItem("savedDecks"));
-      return storedDeck;
-    }
   
     // Retrieve decks from local storage
     const loadedDeckId = 'loadedDeck'; 
@@ -92,13 +77,10 @@ function beginGame() {
     const cardNumber = document.getElementById('cardNum');
     const onGoingScheme = 'onGoingSchemes'
     const onGoingSchemeArea = document.getElementById(onGoingScheme)
-    
-
-    let currentSchemeIndex = 0
-    
+        
     // Function to draw the current card
     function drawCurrentScheme() {
-        if (shuffledDeck && currentSchemeIndex >= 0 && currentSchemeIndex < shuffledDeck.length) {
+        if (currentSchemeIndex >= 0 && currentSchemeIndex < shuffledDeck.length) {
             const card = shuffledDeck[currentSchemeIndex];
             const li = document.createElement('li');
             const img = document.createElement('img');
@@ -122,15 +104,15 @@ function beginGame() {
 
         }
     }
-    document.getElementById('removeOnGoingScheme').addEventListener('click', removeOngoingScheme)
+    document.getElementById('removeOnGoingScheme').addEventListener('click', ()=>{
     // Function to remove an ongoing scheme
-function removeOngoingScheme() {
   const ongoingSchemes = onGoingSchemeArea.querySelectorAll('li')
+
   if(ongoingSchemes.length>0){
     //remove the current card in the dom if it is there
     ongoingSchemes[ongoingSchemes.length-1].remove()
   }
-}
+})
 
     
     //increment function
@@ -154,15 +136,12 @@ function removeOngoingScheme() {
     //functions that put the event listeners onto the buttons
     document.getElementById('incrementScheme').addEventListener('click',incrementScheme)
     document.getElementById('decrementScheme').addEventListener('click',decrementScheme)
-
     drawCurrentScheme();
 
 function reshuffle(){
+  shuffledDeck = shuffleDeck(deck)
   currentSchemeIndex=0
-  shuffleDeck(storedDeck); // Re-shuffle the deck
-  drawCurrentScheme();
-
+  drawCurrentScheme()
+  console.log('Deck has been played through, we are restarting and shuffling up!')
   }
 }
-
-  

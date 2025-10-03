@@ -71,10 +71,16 @@
 
       <!--! This space will be my deck building area. The Undo Button will be able to cut the last card added to the deck -->
       <section class="holder">
+        <form>
+          <select id="savedDecks">
+          </select>
+          <button id="deleteDeck">Delete Deck</button>
+          <button id="editDeck">Edit Deck</button>
+        </form>
         <section class="utilityButtons">
           <button id="undo" class="button">Undo</button>
-          <button id="clearDeck"class="button">Reset</button>
-          <button id="getSavedDecks" class="button">Test to get Decks hope it works</button>
+          <button id="clearDeck"class="button">Remove last saved deck</button>
+
           <form>
             <label for="deckName">Deck Name:</label>
             <input type="text" id="deckName" name="deckName">
@@ -85,9 +91,7 @@
 
             <!-- use this to pull from Saved Decks local storage -->
             <section class="gameMenu buttons"><span>Saved Decks:</span>
-                <select id="savedDecks">
-                  <option value=></option>
-                </select>
+                
         <a class='button' href="ArchEnemyArena.html">Ready to Play?</a>
         <!-- <button class='button' id="shuffle">Shuffle Deck</button> -->
       </section>

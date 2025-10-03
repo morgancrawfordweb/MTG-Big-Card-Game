@@ -49,19 +49,22 @@
   <button class='hidden' id="loadDeckFromLocalStorage">Load Deck</button>
 
   <h1>Welcome to Archenemy Beta!</h1>
-  <p class="rules">You may experience bugs, let me know if you find any</p>
+  <p class="rules">You may experience bugs, let me know if you find any. If you need to construct your deck, click <a href="Archenemy.html">Here</a></p>
+  
 
 <section class="utilityButtons">
 
-  <!-- Will delete -->
-    <button class="button" id="testSavedDecks">Saved Decks</p>
+<!-- Have the user pick and choose what deck they want to use that was stored in local data using a drop down menu. Begin match will be a form, that takes this deck option and spits it out in the begin game function -->
+  <p>Saved Decks</p>
   <!--  -->
-      <form>
         <select id="deckChoices">
         </select>
         <button id="beginGame" class="button">Begin Match!</button>
-      </form>
-    <button id="decrementScheme" class="button">Previous Scheme</button>
+    
+</section>
+
+<section class="utilityButtons">
+  <button id="decrementScheme" class="button">Previous Scheme</button>
     <button id="removeOnGoingScheme" class="button">Remove Ongoing Scheme</button>
     <button id="incrementScheme" class="button">Next Scheme</button>
     <div id="cardNum" class="utilityButtons"></div>

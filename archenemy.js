@@ -235,35 +235,26 @@ function saveDeck(e){
 
 
 
-//! Make this button work with the drop down menu. Be able to pick and remove the deck
-document.getElementById('clearDeck').addEventListener('click', clearDeck)
+//! Drop down menu, will need to be able to delete you deck via dropdown menu by getting the inner value from the drop down and then deleting that exact deck.
+document.addEventListener("DOMContentLoaded", decksSavedIntoLocalStorage)
 
-//*Something like savedDeck.target=>delete target. Maybe give each one a little icon to delete or make. 
-function clearDeck(savedDeck){
-
-  localStorage.removeItem(`${savedDeck}`)
-  console.log(savedDeck)
-  statusOfDeck.textContent = 'Deck was reset'
-}
-
-
-document.querySelector('#getSavedDecks').addEventListener('click', testForGettingLocalStorageDecks)
-// Test for getting cards from my local storage
-function testForGettingLocalStorageDecks(){
-
-  const savedDecks = {}
-   
-
-  // Loops through local storage length and finds every key. Gets every key.
-  // Cached Schemed are first, so we will set i=1 instead
-  for(let i=1;i<=localStorage.length-1;i++){
+function decksSavedIntoLocalStorage(){
+      const savedDecks = document.getElementById('savedDecks')
+      savedDecks.innerHTML = ''
+  for(let i=0;i<=localStorage.length-1;i++){
     const key = localStorage.key(i)
-     savedDecks[key] = localStorage.getItem(key)
-     console.log(key)
-  }
-  console.log(savedDecks)
+    const obj = localStorage.getItem(key)
+    const option = document.createElement('option')
+    // Drop down menu in the deckbuilding portion.
 
-    if(savedDecks.key){}
+    option.value=key
+    option.textContet = key
+    if(key!= 'cachedSchemes'){
+      savedDecks.appendChild(option)
+    }else{
+      console.log("cachedSchemes are present")
+    }
+}
 }
 
 
