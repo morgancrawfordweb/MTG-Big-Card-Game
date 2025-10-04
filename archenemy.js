@@ -182,40 +182,12 @@ document.getElementById('schemes').addEventListener('click', getSchemes)
      renderArchEnemyDeck()
      statusOfDeck.textContent = `Undo was completed`
    }
-   
-   
-
-   
-   //*randomize array right here
-  //  document.getElementById("shuffle").addEventListener ('click', shuffleDeck)
-   //!This function works shuffling the scheme deck array. This is the base. All i need to do now is to set up a playerDeck for the cards the user wants, and then put that array through this function.
-   function shuffleDeck(){
-   var randomizeArray=function(array){
-     var m=array.length,t,i;
-   
-     while(m){
-       //this picks the remaining element
-       i=Math.floor(Math.random()*m--);
-   
-       //this swaps that with the current element
-       t=array[m];
-       array[m]=array[i];
-       array[i]=t;
-     }
-     return array;
-   }
-   
-   randomizeArray(array)
-   renderArchEnemyDeck(schemeDraft)
-   console.log(schemeDraft)
-   }
 
 // //Function for saving deck to local storage in-case anything happens to it or you accidentally leave the game. 
 //Im able to save decks, at least one.
 //* I need a way to grab from a list of saved decks. Maybe have an input form so that someone can name them.
 document.getElementById('submitForLocalStorage').addEventListener ('click', saveDeck)
 const deckElement = document.getElementById('deckName')
-
 
 function saveDeck(e){
   e.preventDefault()

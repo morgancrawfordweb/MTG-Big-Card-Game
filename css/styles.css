@@ -159,7 +159,7 @@ h3{
   justify-self: center;
   text-decoration: underline;
 }
-.buttons,.utilityButtons{
+.utilityButtons{
   display: flex;
   justify-content: center;
   margin: 0% 3%;
@@ -172,6 +172,11 @@ h3{
   color: black;
   padding: 2%;
   margin: 2%;
+  border-radius: 10px;
+}
+
+.button:hover{
+  background-color: rgb(205, 182, 143);
 }
 
 .holder a{
