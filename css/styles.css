@@ -188,6 +188,7 @@ h3{
 /*//! CSS for scheme and ongoing scheme area */
 .schemes{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin: 0% 3%;
     align-items: center;
@@ -207,13 +208,13 @@ h3{
 }
 
 #onGoingSchemes:hover img{
-  transform: scale(1.6);
+  transform: scale(1.4);
   z-index: 1;
   transition: transform 0.5s ease;
 }
 
 #loadedDeck:hover img{
-  transform: scale(1.6);
+  transform: scale(1.4);
   z-index: 1;
   transition: transform 0.5s ease;
 }
@@ -241,6 +242,53 @@ h3{
 
 #potentialDeck{
 margin-right: 2rem;
+}
+
+/* Base layout (mobile first) */
+.schemes {
+  display: grid;
+  grid-template-areas:
+    "controls"
+    "scheme1"
+    "scheme2";
+  gap: 1rem;
+}
+
+#primaryScheme {
+  grid-area: scheme1;
+}
+
+#ongoingScheme {
+  grid-area: scheme2;
+}
+
+.utilityButtons.controls {
+  grid-area: controls;
+}
+
+/* Desktop layout (side-by-side schemes, controls below) */
+@media (min-width: 768px) {
+  .schemes {
+    grid-template-areas:
+      "scheme1 scheme2"
+      "controls controls";
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+  /* optional styling for visual balance */
+  .schemeArea {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .utilityButtons.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
 }
 /* !Planechase styles */
 

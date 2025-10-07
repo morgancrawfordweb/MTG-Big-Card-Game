@@ -53,35 +53,33 @@
   
 
 <section class="utilityButtons">
-
-<!-- Have the user pick and choose what deck they want to use that was stored in local data using a drop down menu. Begin match will be a form, that takes this deck option and spits it out in the begin game function -->
   <p>Saved Decks</p>
-  <!--  -->
-        <select id="deckChoices">
-        </select>
-        <button id="beginGame" class="button">Begin Match!</button>
-    
+  <select id="deckChoices"></select>
+  <button id="beginGame" class="button">Begin Match!</button>
 </section>
 
-<section class="utilityButtons">
-  <button id="decrementScheme" class="button">Previous Scheme</button>
-    <button id="removeOnGoingScheme" class="button">Remove Ongoing Scheme</button>
-    <button id="incrementScheme" class="button">Next Scheme</button>
-    <div id="cardNum" class="utilityButtons"></div>
-</section>
-  
-  <section class="schemes">
-   
-    <section class="schemeArea">
-      <h2>Schemes</h2>
-      <ol id="loadedDeck"></ol>
-    </section>
-    <section class="schemeArea">
-      <h2>Ongoing Schemes</h2>
-      <ol id="onGoingSchemes"></ol>
-    </section>
+<!-- Game area -->
+<section class="schemes">
+  <!-- Scheme display area -->
+  <section class="schemeArea" id="primaryScheme">
+    <h2>Schemes</h2>
+    <ol id="loadedDeck"></ol>
   </section>
 
+  <!-- Ongoing schemes area -->
+  <section class="schemeArea" id="ongoingScheme">
+    <h2>Ongoing Schemes</h2>
+    <ol id="onGoingSchemes"></ol>
+    <button id="removeOnGoingScheme" class="button">Remove Ongoing Scheme</button>
+  </section>
+
+  <!-- The shared control buttons -->
+  <section class="utilityButtons controls">
+    <button id="decrementScheme" class="button">Previous Scheme</button>
+    <button id="incrementScheme" class="button">Next Scheme</button>
+    <div id="cardNum" class="utilityButtons"></div>
+  </section>
+</section>
 
 
 
