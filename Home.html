@@ -30,7 +30,8 @@
 
 </head>
 <body>
-  <nav>
+
+  <nav class="navbar">
     <ul>
       <li>
         <a href="Planechase.html">Planechase</a>
@@ -43,28 +44,38 @@
       </li>
     </ul>
   </nav>
-    <h1>Welcome to Big Card!</h1>
-    <section>
-      <h3> First time?</h3>
-      <a class='rules' href="Rules.html">Here are the rules and extra information</a>
-    </section>
 
-    
-      <div class="rules">
-        <h2>What game are you playing with your friends?</h2>
+  <section class="landing">
+      <h1>Welcome to SpellLeaf</h1>
+      <span>A user created addition for <a href="https://spelltable.wizards.com/">SpellTable</a></span>
+  </section>
 
-        <a href="Archenemy.html">Archenemy</a>
-        <a href="Planechase.html">Planechase</a>
-      </div>
+    <section class="mission">
+      <h2 class="title">The Mission</h2>
+      <p class="rules">
+        I created this application so that users who use spelltable and play magic the gathering remotely may also be able to play alternative game modes. You are free to use variants or however you would like to play, I'm giving the users access to the schemes and planes!
+      </p>
+    </section> 
 
       <section>
         <ul class="card-container">
-          <li class="info-card card-one"><span>Learn how to play</span><p>Rules</p></li>
-          <li class="info-card card-two"><span>Play in teams of 1v3 in this classic game-type!</span><p>Archenemy</p></li>
-          <li class="info-card card-three"><span>Enjoy chaos with four</span><p>Planeschase</p></li>
+          <li><a class="info-card card-one" href="Rules.html"><p>Rules</p></a></li>
+          <li><a class="info-card card-two" href="Archenemy.html"><p>Archenemy</p></a></li>
+          <li><a class="info-card card-three" href="Planechase.html"><p>Planeschase</p></a></li>
         </ul>
       </section>
-      <section></section>
+      
+      <section class="mission">
+      <h2 class="title">New Features</h2>
+      <p class="rules">
+        This has been a slow process, life takes over, projects often forgotten. I have a little more free time at the moment, so I decided to improve upon it! New features include.
+      </p>
+      <ul>
+        <li>Better styling for play areas so its easier to see what is where</li>
+        <li>The ability to save your Archenemy decks to local storage for future use</li>
+        <li>Increased responsiveness for mobile users for playing on the go.</li>
+      </ul>
+    </section> 
 </body>
 <script src ="main.js"> </script>
 </html>
