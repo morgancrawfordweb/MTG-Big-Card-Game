@@ -22,8 +22,8 @@
   /*******************************************/
   
   body {
-      background-color: rgb(224, 219, 255);
-      font-family: 'Kanit';
+        background-color: rgb(203 212 201);
+        font-family: 'Kanit';
   
   }
   
@@ -87,27 +87,28 @@ ol *{
     width: 75%
   }
   a{
-    color: rgb(250, 113, 1);
+  color: #065a15;
+  }
+  a:hover{
+      color: #065a15;
   }
 
 
   /* Navbar styles */
+nav *{
+    display: inline;  }
+
+
 .navbar {
-  background-color: #333;
-  color: #fff;
+  font-size: 18px;
+    display: flex;
+    justify-content: center;
+    background-color: #8e9688bb;
+    color: #fff;
+    border-radius: 0 0 50% 50%;
 }
-nav{
-  display: flex;
-  justify-content: center;
-}
-
-nav ul{
-  display: inline-flex;
-  padding-left: 0;
-}
-nav ul li{
-  list-style-type:none;
-
+.navbar a{
+  color: #065a15;
 }
 
 /* Menu styles */
@@ -167,12 +168,13 @@ h3{
 }
 
 .button{
-  background-color: orange;
+  background-color: rgba(43, 187, 43, 0.325);
   font-size: 1.2rem;
   color: black;
   padding: 2%;
   margin: 2%;
   border-radius: 10px;
+  border: 2px solid black;
 }
 
 .button:hover{

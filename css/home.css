@@ -17,19 +17,11 @@
       clear: both;
   }
   
-  /******************************************
-  /* BASE STYLES
-  /*******************************************/
-  
   body {
       background-color: rgb(203 212 201);
-  
+        font-family: 'Kanit';
   }
-  
-  
-  /******************************************
-  /* LAYOUT
-  /*******************************************/
+
   header {
   
   }
@@ -42,9 +34,11 @@
   *{
     
   }
-  /* CSS for the title */
+  /** CSS for the title */
   .landing{
-    padding: 5%;
+    margin: 2%;
+    padding: 6%;
+    align-items: center;
   }
 
   .landing h1{
@@ -53,6 +47,7 @@
 
   .landing span{
     font-size: 30px;
+    align-items: center;
   }
 
   .mission{
@@ -67,9 +62,8 @@
   .mission p{
     font-size: 20px;
   }
-  /* CSS for homepage */
-  /******************************************/
- .card-image{
+
+  .card-image{
     /* max-width: 50%; */
     transform: rotate(0deg);
     z-index: 0;  
@@ -81,7 +75,10 @@
   gap: 1rem;
   justify-content: center;
   width: 100%;
-  padding-right: 2rem;
+  padding:2%;
+}
+.card-container li{
+  list-style-type: none;
 }
 
 .info-card {
@@ -137,10 +134,17 @@
 
 }
 
+/* ! */
+/* ! */
+/* ! */
+/* Mobile card container format */
+/* ! */
+/* ! */
+/* ! */
 @media(max-width: 800px){
   .card-container{
     flex-direction: column;
-    margin: 5%;
+    margin: 0 15% 0 0;
   }
 
   .info-card{
@@ -148,15 +152,6 @@
     margin: 5% 2%;
   }
 }
-
-
-
-
-
-
-
-
-
 
 
   /* ADDITIONAL STYLES*/
@@ -177,7 +172,7 @@
   }
 
   li{
-    list-style-type: none;
+    list-style-type: bullet;
     padding: 15px;
   }
 
@@ -220,10 +215,14 @@ img{
     width: 65%;
   } */
   .card-container a{
-    color: rgb(6, 90, 21);
+    color: #065a15;
   }
+  
 
-
+/* ! */
+/* ! */
+/* ! */
+/* ! */
   /* Navbar styles */
 nav *{
     display: inline;  }
@@ -233,12 +232,22 @@ nav *{
   font-size: 18px;
     display: flex;
     justify-content: center;
-    background-color: #333333bb;
+    background-color: #8e9688bb;
     color: #fff;
-    border-radius: 0 0 50px 50px;
+    border-radius: 0 0 50% 50%;
+}
+.navbar a{
+  color: #065a15;
 }
 
+
+/* ! */
+/* ! */
+/* ! */
 /* Menu styles */
+/* ! */
+/* ! */
+/* ! */
 .menu {
   display: none; /* Hide the menu by default */
   list-style: none;
@@ -267,9 +276,9 @@ nav *{
   display: inline-flex;
   justify-content: center;
 }
-.rules{
+/* .rules{
   margin: 0 10%;
-}
+} */
 .schemes *{
   transform: rotate(0deg);
   display: grid;
@@ -283,6 +292,19 @@ transform: rotate(0deg);
   display: inline-flex;
   justify-content: space-evenly; 
 
+}
+
+/* ! */
+/* ! */
+/* ! */
+/** New Features list */
+.features {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: start;
+  margin: 1%;
+  font-size: 1.5rem;
 }
 
 
