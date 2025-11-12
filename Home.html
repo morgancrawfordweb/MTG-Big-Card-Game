@@ -26,6 +26,7 @@
     />
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/home.css" >
+    <script src="http://tappedout.net/tappedout.js"></script>
 
 
 </head>
@@ -76,6 +77,34 @@
         <li>Increased responsiveness for mobile users for playing on the go.</li>
       </ul>
     </section> 
+
+    <section>
+      <h2>Test Section</h2>
+      <section>
+        <blockquote>
+          12x Serra Angel
+        </blockquote>
+        <div class="deck-list" data-stub="horde-format-the-armies-of-men"></div>
+      </section>
+      <iframe
+        src="https://tappedout.net/mtg-decks/theres-a-sliver-for-that/?fmt=embed"
+        width="100%"
+        height="700"
+        frameborder="0"
+      >
+      </iframe>
+
+
+      <form id="fetchHorde">
+        <label for="hordeDeck">Grab your horde</label>
+        <input  id="hordeDeck" type="text" placeholder="horde-format-the-armies-of-men">
+        <button id="getHordeDeck" type="submit">Get Deck</button>
+      </form>
+      <div id="deckOutput"></div>
+
+
+      I'd like to thank <span class="mtgcard">Phyrexian Dreadnought</span> for existing. But really <span class="mtgcard">Serra Angel [M10]</span> is my jam.
+    </section>
 </body>
-<script src ="main.js"> </script>
+<script src ="horde.js"> </script>
 </html>
