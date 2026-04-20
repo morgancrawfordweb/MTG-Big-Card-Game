@@ -36,24 +36,7 @@
 //              img.className = 'cardImage'
 //              li.appendChild(img)
 //              listOfSchemes.appendChild(li)
-   
-   
-//              //*ChatGPT idk what this is. This is 
-//                // Creating the dropdown options
-//                // for (let count = 0; count <= 2; count++) {
-//                //   const option = document.createElement('option');
-//                //   option.value = count;
-//                //   option.text = count;
-//                //   select.appendChild(option);
-   
-//                //   select.addEventListener('change', function(e) {
-//                //     const selectedCount = parseInt(e.target.value);
-//                //     addToDeck(schemeDeck[i], selectedCount);
-//                //   });
-                 
-//                //   li.appendChild(select);
-//                //   listOfSchemes.appendChild(li);
-//      // }
+
    
 //            }
    
